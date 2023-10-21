@@ -1,14 +1,16 @@
 const database = require("../database");
 const { collections } = require("../database");
+const { ObjectId } = require("mongodb");
 
 const create = module.exports;
 
 create.createRequest = async (req) => {
     const { userId } = req.user;
     const { item, itemNeeded, drop, dropLocation, time, fare } = req.body;
-    
+
     const payload = {
         uid: userId,
+        createdAt: new Date().toISOString(),
     };
 
     if (!item && !drop) throw new Error('Item or drop is required');
@@ -17,13 +19,13 @@ create.createRequest = async (req) => {
     payload.fare = fare;
 
     if (item === 'true') {
-        if(!itemNeeded) throw new Error('Item needed is required');
+        if (!itemNeeded) throw new Error('Item needed is required');
         payload.item = true;
         payload.itemNeeded = itemNeeded;
     }
 
     if (drop === 'true') {
-        if(!dropLocation) throw new Error('Drop location is required');
+        if (!dropLocation) throw new Error('Drop location is required');
         payload.drop = true;
         payload.dropLocation = dropLocation;
     }
@@ -40,11 +42,11 @@ create.getRequests = async (req) => {
     const startTime = req.query.startTime || 0;
     const endTime = req.query.endTime || 0;
 
-    const key ={
+    const key = {
         uid,
     }
 
-    if(startTime && endTime) {
+    if (startTime && endTime) {
         key.time = {
             $gte: startTime,
             $lte: endTime,
@@ -67,4 +69,25 @@ create.getRequests = async (req) => {
         currentPage: page,
         totalDocuments: count,
     };
+}
+
+create.acceptRequests = async (req) => {
+    const { userId } = req.user;
+    const { requestIds } = req.body;
+
+    if (!requestIds || !requestIds.length) throw new Error('Request ids are required');
+
+    const payload = {
+        acceptedBy: userId,
+        acceptedAt: new Date().toISOString(),
+    }
+    let dbCall =  await Promise.all(
+        requestIds.map(requestId => database.client.collection(collections.REQUESTS).findOneAndUpdate({ _id: new ObjectId(requestId) }, { $set: payload }))
+    )
+
+    dbCall = dbCall.map((item) => {
+        return {_id: item.value._id, ok: item.ok}
+    });
+
+    return { dbCall };
 }

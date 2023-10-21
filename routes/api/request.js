@@ -6,5 +6,6 @@ const middlewares = require('../../middlewares');
 
 setupApiRoute(router, 'post', '/create', [middlewares.user.authenticateUser], controllers.api.request.createRequest)
 setupApiRoute(router, 'get', '/get', [middlewares.user.authenticateUser], controllers.api.request.getRequests)
+setupApiRoute(router, 'post', '/accept', [middlewares.user.authenticateUser], controllers.api.request.acceptRequests)
 
 module.exports = router;
