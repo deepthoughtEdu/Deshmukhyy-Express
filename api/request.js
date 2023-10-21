@@ -11,6 +11,7 @@ create.createRequest = async (req) => {
     const payload = {
         uid: userId,
         createdAt: new Date().toISOString(),
+        status: 'pending',
     };
 
     if (!item && !drop) throw new Error('Item or drop is required');
@@ -38,13 +39,15 @@ create.getRequests = async (req) => {
 
     const limit = parseInt(req.query.limit) || 5;
     const page = parseInt(req.query.page) || 1;
-    const uid = req.query.uid || userId;
     const startTime = req.query.startTime || 0;
     const endTime = req.query.endTime || 0;
+    const { status, user } = req.query;
 
-    const key = {
-        uid,
-    }
+    const key = {}
+
+    status && (key.status = status);
+    user === 'rider' ? (key.acceptedBy = userId) : (key.uid = userId);
+
 
     if (startTime && endTime) {
         key.time = {
@@ -74,13 +77,16 @@ create.getRequests = async (req) => {
 create.acceptRequests = async (req) => {
     const { userId } = req.user;
     const { requestIds } = req.body;
+    const status = req.query.status || 'accepted';
 
     if (!requestIds || !requestIds.length) throw new Error('Request ids are required');
 
     const payload = {
         acceptedBy: userId,
         acceptedAt: new Date().toISOString(),
+        status,
     }
+
     let dbCall =  await Promise.all(
         requestIds.map(requestId => database.client.collection(collections.REQUESTS).findOneAndUpdate({ _id: new ObjectId(requestId) }, { $set: payload }))
     )
