@@ -1,14 +1,16 @@
 const database = require("../database");
 const { collections } = require("../database");
 
-const create = module.exports;
+const request = module.exports;
 
-create.createRequest = async (req) => {
+request.createRequest = async (req) => {
     const { userId } = req.user;
     const { item, itemNeeded, drop, dropLocation, time, fare } = req.body;
-    
+
     const payload = {
         uid: userId,
+        createdAt: new Date().toISOString(),
+        status: 'pending',
     };
 
     if (!item && !drop) throw new Error('Item or drop is required');
@@ -17,34 +19,36 @@ create.createRequest = async (req) => {
     payload.fare = fare;
 
     if (item === 'true') {
-        if(!itemNeeded) throw new Error('Item needed is required');
+        if (!itemNeeded) throw new Error('Item needed is required');
         payload.item = true;
         payload.itemNeeded = itemNeeded;
     }
 
     if (drop === 'true') {
-        if(!dropLocation) throw new Error('Drop location is required');
+        if (!dropLocation) throw new Error('Drop location is required');
         payload.drop = true;
         payload.dropLocation = dropLocation;
     }
 
     return await database.client.collection(collections.REQUESTS).insertOne(payload);
-}
+};
 
-create.getRequests = async (req) => {
+request.getRequests = async (req) => {
     const { userId } = req.user;
 
     const limit = parseInt(req.query.limit) || 5;
     const page = parseInt(req.query.page) || 1;
-    const uid = req.query.uid || userId;
     const startTime = req.query.startTime || 0;
     const endTime = req.query.endTime || 0;
+    const { status, role } = req.query;
 
-    const key ={
-        uid,
-    }
+    const key = {}
 
-    if(startTime && endTime) {
+    status && (key.status = status);
+    role === 'rider' ? (key.acceptedBy = userId) : (key.uid = userId);
+
+
+    if (startTime && endTime) {
         key.time = {
             $gte: startTime,
             $lte: endTime,
@@ -67,4 +71,4 @@ create.getRequests = async (req) => {
         currentPage: page,
         totalDocuments: count,
     };
-}
+};
