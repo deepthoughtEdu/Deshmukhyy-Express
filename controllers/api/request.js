@@ -14,3 +14,7 @@ requestController.getRequests = async (req, res) => {
 requestController.acceptRequests = async (req, res) => {
 	helpers.formatApiResponse(200, res, await apiHandlers.request.acceptRequests(req));
 };
+
+requestController.addRating = async (req, res) => {
+	helpers.formatApiResponse(200, res, await apiHandlers.request.addRating(req));
+};

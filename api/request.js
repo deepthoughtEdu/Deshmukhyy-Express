@@ -2,9 +2,9 @@ const database = require("../database");
 const { collections } = require("../database");
 const { ObjectId } = require("mongodb");
 
-const create = module.exports;
+const request = module.exports;
 
-create.createRequest = async (req) => {
+request.createRequest = async (req) => {
     const { userId } = req.user;
     const { item, itemNeeded, drop, dropLocation, time, fare } = req.body;
 
@@ -32,9 +32,9 @@ create.createRequest = async (req) => {
     }
 
     return await database.client.collection(collections.REQUESTS).insertOne(payload);
-}
+};
 
-create.getRequests = async (req) => {
+request.getRequests = async (req) => {
     const { userId } = req.user;
 
     const limit = parseInt(req.query.limit) || 5;
@@ -72,12 +72,12 @@ create.getRequests = async (req) => {
         currentPage: page,
         totalDocuments: count,
     };
-}
+};
 
-create.acceptRequests = async (req) => {
+request.acceptRequests = async (req) => {
     const { userId } = req.user;
     const { requestIds } = req.body;
-    const status = req.query.status || 'accepted';
+    const status = req.body.status || 'accepted';
 
     if (!requestIds || !requestIds.length) throw new Error('Request ids are required');
 
@@ -96,4 +96,23 @@ create.acceptRequests = async (req) => {
     });
 
     return { dbCall };
-}
+};
+
+request.addRating = async (req) => {
+    const { requestId, rating } = req.body;
+
+    if (!requestId) throw new Error('Request id is required');
+    if (!rating) throw new Error('Rating is required');
+    if (rating < 1 || rating > 5) throw new Error('Rating should be between 1 to 5');
+
+    const request = await database.client.collection(collections.REQUESTS).findOne({ _id: new ObjectId(requestId) });
+    if (!request) throw new Error('Request not found');
+    if (request.status !== 'completed') throw new Error('Request is not completed yet');
+    if (request.rating) throw new Error('Rating already added');
+
+    const payload = {
+        rating: parseInt(rating),
+    }
+
+    return await database.client.collection(collections.REQUESTS).findOneAndUpdate({ _id: new ObjectId(requestId), status: 'completed' }, { $set: payload });
+};
