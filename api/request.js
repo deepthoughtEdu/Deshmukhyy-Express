@@ -41,12 +41,12 @@ create.getRequests = async (req) => {
     const page = parseInt(req.query.page) || 1;
     const startTime = req.query.startTime || 0;
     const endTime = req.query.endTime || 0;
-    const { status, user } = req.query;
+    const { status, role } = req.query;
 
     const key = {}
 
     status && (key.status = status);
-    user === 'rider' ? (key.acceptedBy = userId) : (key.uid = userId);
+    role === 'rider' ? (key.acceptedBy = userId) : (key.uid = userId);
 
 
     if (startTime && endTime) {
