@@ -6,7 +6,7 @@ const request = module.exports;
 
 request.createRequest = async (req) => {
     const { userId } = req.user;
-    const { customerchoice, requirement, time, fare } = req.body;
+    const { category, requirement, time, fare } = req.body;
 
     const payload = {
         uid: userId,
@@ -14,7 +14,7 @@ request.createRequest = async (req) => {
         status: 'pending',
     };
 
-    payload.customerchoice = customerchoice;
+    payload.category = category;
     payload.time = time;
     payload.fare = fare;
     payload.requirement = requirement;
