@@ -7,3 +7,7 @@ pagesController.getHomePage = async (req, res) => {
 pagesController.login = async (req, res) => {
     res.render('login', { title: 'Login' });
 }
+
+pagesController.request = async (req, res) => {
+    res.render('deshmukhyyexpress/request', { title: 'Request' });
+}
