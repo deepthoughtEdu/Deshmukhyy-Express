@@ -3,6 +3,14 @@ const apiHandlers = require('../../api');
 
 const requestController = module.exports;
 
-requestController.createRequest = async (req, res) => {
-	helpers.formatApiResponse(200, res, await apiHandlers.request.createRequest(req));
+requestController.create = async (req, res) => {
+	helpers.formatApiResponse(200, res, await apiHandlers.request.create(req));
+};
+
+requestController.get = async (req, res) => {
+	helpers.formatApiResponse(200, res, await apiHandlers.request.get(req));
+};
+
+requestController.update = async (req, res) => {
+	helpers.formatApiResponse(200, res, await apiHandlers.request.update(req));
 };

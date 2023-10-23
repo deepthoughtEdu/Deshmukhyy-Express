@@ -15,7 +15,7 @@ function initialize() {
         console.log(formData)
 
         $.ajax({
-            url: '/api/request/create',
+            url: '/api/request',
             method: 'post',
             cache: false,
             contentType: 'application/json; charset=utf-8',
