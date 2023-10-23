@@ -29,9 +29,7 @@ request.get = async (req) => {
     const limit = parseInt(req.query.limit) || 5;
     const page = parseInt(req.query.page) || 0;
     const offset = page*limit;
-
-    const key = {}
-    key.uid = userId
+    const key = {uid:userId}
 
     const count = await database.client.collection(collections.REQUESTS).countDocuments(key);
     const requests = await database.client.collection(collections.REQUESTS).find(key).skip(offset).limit(limit).toArray();
