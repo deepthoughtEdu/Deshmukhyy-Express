@@ -1,30 +1,29 @@
 const templates = {
     table: {
         container: (data) => {
-            return `<table class="sdlms-my-upcoming-session-table ${data.classes || ''} w-100">${data.html || ''}</table>`
+            return `<table class=" border m-4 table w-75 ${data.classes || ''}">${data.html || ''}</table>`
         },
         header: (data) => {
-            return `<thead class="sdlms-default-table-head secondary-header sdlms-text-white-18px font-weight-medium">
-                        <tr class="sdlms-default-table-header-row">${data.columns.map(column => templates.table.th(column)).join(' ')}</tr> </thead>        `
+            return `<thead>
+                        <tr>${data.columns.map(column => templates.table.th(column)).join(' ')}</tr> </thead>        `
         },
         th: (data) => {
-            return `<th class="${data.classes || ''} font-weight-500">${data.title}</th>`
+            return `<th class="col ${data.classes || ''}">${data.title}</th>`
         },
         row: (row, attributes,classes='') => {
             let attr = '';
             for (const i in attributes) attr += `data-${i}="${attributes[i]}" `;
-                // return `<tr ${attr} class="sdlms-default-table-row ${classes}">${Object.keys(row).map(key =>
-                return `<tr ${attr} class="sdlms-my-upcoming-session-table-row ${classes}">${Object.keys(row).map(key => templates.table.td({
+                return `<tr ${attr} class=" ${classes}">${Object.keys(row).map(key => templates.table.td({
                 classes: key,
                 value: row[key]
             })).join(' ')
                 }</tr>`
         },
         td: (data) => {
-            return `<td class="${data.classes || ''} sdlms-default-table-Session-topic font-weight-500 sdlms-text-black-18px">${data.value}</td>`
+            return `<td class="${data.classes || ''}">${data.value}</td>`
         },
         body: function (data,classes={}) {
-            return `<tbody class="${classes.body || ''}">${data.map(row => templates.table.row(row.data, row.attributes || {},classes.row)).join(' ')}</tbody>`
+            return `<tbody class="${classes.body || ''}">${data.map(row => templates.table.row(row.data, row.attributes || {},(row.classes || classes.row))).join(' ')}</tbody>`
         },
         empty: function (data) {
             let { message = 'No data found!' } = data;
@@ -82,7 +81,7 @@ class Table {
         this.loader(true);
         this.url = url || this.url;
         if(!this.url) return false;
-        $($that.target).html(`<sdlms-table></sdlms-table>`);
+        $($that.target).html(``);
         if(this.withSkeleton) this.skeleton();
         $.ajax({
             url: url,
@@ -91,7 +90,7 @@ class Table {
             success: ({ response }) => {
                 console.log(response);
                     let { from }  = response;
-                    $($that.target).find('sdlms-table').html(!response.data.length ? $that.emptyMessage : $that.template.container({
+                    $($that.target).html(!response.data.length ? $that.emptyMessage : $that.template.container({
                         html: ($that.template.header({ columns: $that.columns }) + $that.template.body($that.formatter(response.data, from))),
                         classes: $that.hover ? '' : 'no-hover'
                     })).append(!response.data.length ? '' : $that.paginate(response));
@@ -101,7 +100,7 @@ class Table {
                 },
             error: ((error) => {
                     console.log(error);
-                    $($that.target).find('sdlms-table').html($that.emptyMessage);
+                    $($that.target).find('table').html($that.emptyMessage);
                 })
             })
     }                    
@@ -122,8 +121,8 @@ class Table {
     }
     skeleton() {
         let $that = this;
-        $($that.target).html(`<sdlms-table></sdlms-table>`);
-        $($that.target).find('sdlms-table').html($that.template.container({
+        $($that.target).html(`<table></table>`);
+        $($that.target).find('table').html($that.template.container({
             html: ($that.template.header({ columns: $that.columns }) + $that.template.body($that.formatter(Array(10).fill({})),{
                 row:"skeleton-box"
             }))
@@ -143,8 +142,8 @@ class Table {
         this.render();
     }
     static populate(target,data,config={}) {
-        $(target).html(`<sdlms-table></sdlms-table>`);
-        $(target).find('sdlms-table').html(!data.rows.length ? 'No Data': templates.table.container({
+        $(target).html(`<table></table>`);
+        $(target).find('table').html(!data.rows.length ? 'No Data': templates.table.container({
             html: (templates.table.header({ columns: data.columns }) +templates.table.body(data.formatter(data.rows))),
             classes: config.classes ? config.classes : ""
         }))

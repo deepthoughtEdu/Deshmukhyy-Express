@@ -27,7 +27,7 @@ request.get = async (req) => {
     const { userId } = req.user;
 
     const limit = parseInt(req.query.limit) || 5;
-    const page = parseInt(req.query.page) || 1;
+    const page = parseInt(req.query.page) || 0;
     const startTime = req.query.startTime || 0;
     const endTime = req.query.endTime || 0;
     const { status, role } = req.query;
@@ -45,7 +45,8 @@ request.get = async (req) => {
     }
 
     const count = await database.client.collection(collections.REQUESTS).countDocuments(key);
-    const offset = (page - 1) * limit;
+    const offset = (page ) * limit;
+    console.log()
 
     const requests = await database.client.collection(collections.REQUESTS).find(key).skip(offset).limit(limit).toArray();
 
@@ -55,18 +56,18 @@ request.get = async (req) => {
 request.update = async (req) => {
     const { userId } = req.user;
     const { status } = req.body;
-    const id = req.params.id; 
+    const id = req.params.id;
 
-    const validStatus = ['approved', 'pending', 'cancelled'];
-    const searchKeys = {userId};
+    const validStatus = ['approved', 'waiting', 'cancelled'];
+    const searchKeys = { uid:userId };
     const payload = {}
-
-    if(!validStatus.includes(status)) throw new Error("Invalid status supplied!");
-    if(!ObjectId.isvalid(id)) throw new Error("Invalid request ID!")
-
-    searchKeys._id = ObjectId(id);
+    if (!validStatus.includes(status)) throw new Error("Invalid status supplied!");
+    if (!ObjectId.isValid(id)) throw new Error("Invalid request ID!")
+    
+    searchKeys._id = new ObjectId(id);
+    console.log(searchKeys)
     payload.status = status;
     payload.updatedAt = utilities.getISOTimestamp();
 
-    await database.client.collection(collections.REQUESTS).findOneAndUpdate(searchKeys, payload);
+    await database.client.collection(collections.REQUESTS).findOneAndUpdate(searchKeys, { $set: payload });
 };
