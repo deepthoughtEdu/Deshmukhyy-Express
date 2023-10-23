@@ -7,6 +7,6 @@ var middlewares = require('../middlewares');
 /* GET home page. */
 helpers.setupPageRoute(router, '/', [middlewares.user.requireLogin], controllers.pages.getHomePage)
 helpers.setupPageRoute(router, '/login', [], controllers.pages.login)
-helpers.setupPageRoute(router, '/app/request', [], controllers.pages.request)
+helpers.setupPageRoute(router, '/app/request', [middlewares.user.requireLogin], controllers.pages.request)
 
 module.exports = router;
