@@ -1,5 +1,67 @@
 <%- include("../header") -%>
 
+    <link rel="stylesheet" href="/stylesheets/app/request.css">
 
+    <div class="d-flex justify-content-center">
+        <h5>User Dashboard</h5>
+    </div>
 
-<%- include("../footer") -%>
+    <div id="order-details"></div>
+
+    <div class="d-flex justify-content-center">
+        <table class="border m-4 table w-75">
+            <thead>
+                <tr>
+                    <th scope="col">S No</th>
+                    <th scope="col">Rquested Order</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Fare</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-success">
+                    <th scope="row">1</th>
+                    <td class="align-content-between d-flex">Biryani</td>
+                    <td>Delivery</td>
+                    <td>14:00</td>
+                    <td>45</td>
+                    <td><select class="custom-select" name="status">
+                            <option selected="" value="approved">Approved</option>
+                            <option value="waiting">Wait</option>
+                            <option value="cancelled">Cancel</option>
+                        </select></td>
+                </tr>
+                <tr class="table-danger">
+                    <th scope="row">1</th>
+                    <td>Biryani</td>
+                    <td>Delivery</td>
+                    <td>14:00</td>
+                    <td>45</td>
+                    <td><select class="custom-select" name="status">
+                            <option selected="" value="approved">Approved</option>
+                            <option value="waiting">Wait</option>
+                            <option value="cancelled">Cancel</option>
+                        </select></td>
+                </tr>
+                <tr class="table-warning">
+                    <th scope="row">1</th>
+                    <td>Biryani</td>
+                    <td>Delivery</td>
+                    <td>14:00</td>
+                    <td>45</td>
+                    <td><select class="custom-select" name="status">
+                            <option selected="" value="approved">Approved</option>
+                            <option value="waiting">Wait</option>
+                            <option value="cancelled">Cancel</option>
+                        </select></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="modules/table.js"></script>
+    <script src="/javascript/app/userdashboard.js"></script>
+
+    <%- include("../footer") -%>
