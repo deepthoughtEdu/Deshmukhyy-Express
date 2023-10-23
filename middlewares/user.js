@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const database = require('../database');
+const helpers = require('../helpers');
+
 const {
     collections
 } = require('../database');
@@ -7,7 +9,7 @@ const {
 const authentication = module.exports
 const protectedUserFields = ['password'];
 
-authentication.filterAndHideProtectedUserFields = function (userData={}) {
+authentication.filterAndHideProtectedUserFields = function (userData = {}) {
     const filteredUserData = {};
 
     Object.keys(userData).forEach(key => {
@@ -25,7 +27,7 @@ authentication.serializeUser = async function (user, done) {
 
 authentication.deserializeUser = async function (id, done) {
     try {
-        const user = await database.client.collection(collections.USERS).findOne({userId: id});
+        const user = await database.client.collection(collections.USERS).findOne({ userId: id });
         const filteredUserData = authentication.filterAndHideProtectedUserFields(user)
         if (user) {
             done(null, filteredUserData)
@@ -36,7 +38,7 @@ authentication.deserializeUser = async function (id, done) {
 }
 
 authentication.verifyUser = async function (req, res, next, done) {
-    const {username, password} = req.body;
+    const { username, password } = req.body;
     const userSearchKeys = {
         $or: [{
             username: username.trim()
@@ -66,7 +68,14 @@ authentication.verifyUser = async function (req, res, next, done) {
 
 authentication.authenticateUser = async function (req, res, next) {
     if (!req.isAuthenticated() || !req.user) {
-        return res.redirect('/');
+        return helpers.formatApiResponse(401, res, new Error("You need to be authenticated to access this API endpoint."));
+    }
+    next();
+}
+
+authentication.requireLogin = async function (req, res, next) {
+    if (!req.isAuthenticated() || !req.user) {
+        return res.redirect('/login');
     }
 
     next();
