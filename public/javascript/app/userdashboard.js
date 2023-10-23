@@ -50,8 +50,8 @@ function initialize() {
                 classes:classes.type[row.status],
                 data: {
                     Sno:`${(from + (index + 1))}`,
-                    ordername: row.requirement,
-                    category: row.category,
+                    ordername: row.requirement.charAt(0).toUpperCase() + row.requirement.slice(1),
+                    category: row.category.charAt(0).toUpperCase() + row.category.slice(1),
                     time: row.time,
                     fare: row.fare,
                     status: getSelect(row.status || 'approved'),
@@ -83,6 +83,20 @@ function initialize() {
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             data: JSON.stringify(data),
+            success: function () {
+                Swal.fire(
+                    'Success!',
+                    'Order status updated successfully.',
+                    'success'
+                )
+            },
+            error: function () {
+                Swal.fire(
+                    'Error!',
+                    'Something went wrong.',
+                    'error'
+                );
+            }
         })
     })
 }
@@ -92,19 +106,3 @@ function initialize() {
 
 
 
-            // success: function () {
-            //     Swal.fire(
-            //         'Success!',
-            //         'Logged in successfully',
-            //         'success'
-            //     ).then(() => {
-            //         location.pathname = '/'
-            //     });
-            // },
-            // error: function () {
-            //     Swal.fire(
-            //         'Error!',
-            //         'Please enter correct username or password',
-            //         'error'
-            //     );
-            // }

@@ -28,26 +28,12 @@ request.get = async (req) => {
 
     const limit = parseInt(req.query.limit) || 5;
     const page = parseInt(req.query.page) || 0;
-    const startTime = req.query.startTime || 0;
-    const endTime = req.query.endTime || 0;
-    const { status, role } = req.query;
+    const offset = page*limit;
 
     const key = {}
-
-    status && (key.status = status);
-    role === 'rider' ? (key.acceptedBy = userId) : (key.uid = userId);
-
-    if (startTime && endTime) {
-        key.time = {
-            $gte: startTime,
-            $lte: endTime,
-        }
-    }
+    key.uid = userId
 
     const count = await database.client.collection(collections.REQUESTS).countDocuments(key);
-    const offset = (page ) * limit;
-    console.log()
-
     const requests = await database.client.collection(collections.REQUESTS).find(key).skip(offset).limit(limit).toArray();
 
     return utilities.paginate(`/api/request${req.url}`, requests, count, limit, page);

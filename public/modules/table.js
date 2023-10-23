@@ -1,7 +1,7 @@
 const templates = {
     table: {
         container: (data) => {
-            return `<table class=" border m-4 table w-75 ${data.classes || ''}">${data.html || ''}</table>`
+            return `<table class="m-4 table w-75 ${data.classes || ''}">${data.html || ''}</table>`
         },
         header: (data) => {
             return `<thead>
@@ -40,9 +40,9 @@ const templates = {
             return `<nav class="pagination justify-content-center pt-2"> <ul class="pagination d-flex justify-content-center">${data.html || ''}</ul></nav>`
         },
         previous: function (url) {
-            return `<li class="page-item mr-2"><a data-href="${url}" data-navigation class="page-link ${!url ? 'disabled' : ''}" href="#">
+            return `<li class="page-item mr-2"><a data-href="${url}" data-navigation class="page-link ${!url ? 'disabled' : ''}" href="#" style="border: none;">
             <span aria-hidden="true" class="p-2">
-                <svg width="15" height="24" viewBox="0 0 15 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="15" height="20" viewBox="0 0 15 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15 21.1797L5.72863 12L15 2.82031L12.1457 -1.24766e-07L-5.24537e-07 12L12.1457 24L15 21.1797Z" fill="#0029FF" fill-opacity="0.8"></path>
                 </svg>
             </span></a></li>`
@@ -51,9 +51,9 @@ const templates = {
             return ` <li class="page-item mt-2"><span>${current_page} of ${last_page + 1}</span></li>`
         },
         next: function (url) {
-            return `<li class="page-item ml-2"><a data-href="${url}" data-navigation  class="page-link ${!url ? 'disabled' : ''}" href="#">
+            return `<li class="page-item ml-2"><a data-href="${url}" data-navigation  class="page-link ${!url ? 'disabled' : ''}" href="#" style="border: none;">
             <span aria-hidden="true" class="p-2">
-                <svg width="15" height="24" viewBox="0 0 15 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="15" height="20" viewBox="0 0 15 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M-9.25794e-07 2.82031L9.27137 12L-1.2328e-07 21.1797L2.85431 24L15 12L2.85431 -1.24766e-07L-9.25794e-07 2.82031Z" fill="#0029FF" fill-opacity="0.8"></path>
                 </svg>
             </span></a></li>`
