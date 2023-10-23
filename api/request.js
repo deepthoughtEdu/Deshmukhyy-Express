@@ -63,21 +63,3 @@ request.getRequests = async (req) => {
     };
 };
 
-request.update = async (req) => {
-    const { userId } = req.user;
-    const { status } = req.body;
-    const id = req.params.id; 
-
-    const validStatus = ['approved', 'pending', 'cancelled'];
-    const searchKeys = {userId};
-    const payload = {}
-
-    if(!validStatus.includes(status)) throw new Error("Invalid status supplied!");
-    if(!ObjectId.isvalid(id)) throw new Error("Invalid request ID!")
-
-    searchKeys._id = ObjectId(id);
-    payload.status = status;
-    payload.updatedAt = utilities.getISOTimestamp();
-
-    await database.client.collection(collections.REQUESTS).findOneAndUpdate(searchKeys, payload);
-};
