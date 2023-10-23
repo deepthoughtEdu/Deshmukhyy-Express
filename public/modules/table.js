@@ -1,6 +1,4 @@
-const { response } = require("express");
-
-let templates = {
+const templates = {
     table: {
         container: (data) => {
             return `<table class="sdlms-my-upcoming-session-table ${data.classes || ''} w-100">${data.html || ''}</table>`
@@ -78,7 +76,6 @@ class Table {
         this.emptyMessage = templates.table.empty({ message: data.emptyMessage });
         this.perPage = data.perPage || 5;
     }
-
     render(url) {
        
         let $that = this;
@@ -91,8 +88,9 @@ class Table {
             url: url,
             method: 'get',
             cache: false,
-            success: ((response) => {
-                    let { from } = response;
+            success: ({ response }) => {
+                console.log(response);
+                    let { from }  = response;
                     $($that.target).find('sdlms-table').html(!response.data.length ? $that.emptyMessage : $that.template.container({
                         html: ($that.template.header({ columns: $that.columns }) + $that.template.body($that.formatter(response.data, from))),
                         classes: $that.hover ? '' : 'no-hover'
@@ -100,15 +98,13 @@ class Table {
                     $that.events();
                     $that.params = {};
                     $($that.target).trigger('table:rendered', response);
-                }).catch((error) => {
+                },
+            error: ((error) => {
                     console.log(error);
                     $($that.target).find('sdlms-table').html($that.emptyMessage);
-                }).finally(() => {
-                    $that.loader(false)
                 })
             })
-        }        
-                
+    }                    
     paginate(data) {
         return this.pagination.container({
             html: (this.pagination.previous(data.prev_page_url) + this.pagination.details(data.to, data.last_page) + this.pagination.next(data.next_page_url))
@@ -146,7 +142,6 @@ class Table {
         this.params = {};
         this.render();
     }
-
     static populate(target,data,config={}) {
         $(target).html(`<sdlms-table></sdlms-table>`);
         $(target).find('sdlms-table').html(!data.rows.length ? 'No Data': templates.table.container({
