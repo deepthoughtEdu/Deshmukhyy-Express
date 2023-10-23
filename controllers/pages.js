@@ -12,8 +12,4 @@ pagesController.request = async (req, res) => {
     res.render('app/request', { title: 'Request' });
 }
 
-pagesController.userdashboard = async (req, res) => {
-    res.render('app/userdashboard', { title: 'User Dashboard' });
-}
-
 
