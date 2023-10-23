@@ -1,4 +1,5 @@
 $(window).on('load', initialize);
+
 const classes = {
     type:{
         cancelled:"table-danger",
@@ -21,12 +22,14 @@ let types = {
         isSelected:false
     }
 };
+
 function getSelect(selected){
   let html =  Object.keys(types).map(type => {
         return ` <option ${type == selected ? 'selected="true"' : ""} value="${type}">${types[type].label}</option>`
   }).join('');
   return  `<select class="custom-select status" name="status">${html}</select>`
 }
+
 function initialize() {
     let orderDetailsTable = new Table({
         target:'#order-details',
