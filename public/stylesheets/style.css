@@ -5,6 +5,7 @@ body {
 
 a {
   color: #00B7FF;
+  text-decoration: none !important;
 }
 
 .page-header{
@@ -40,10 +41,11 @@ a {
 .logout-icon {
   font-size: x-large !important; 
   color: #000000a6;
+  cursor: pointer
 }
 
 .project-container {
-  margin-top: 40px;
+  margin-top: 65px;
 }
 
 footer{
