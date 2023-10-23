@@ -7,5 +7,6 @@ var controllers = require('../controllers');
 helpers.setupPageRoute(router, '/', [], controllers.pages.getHomePage)
 helpers.setupPageRoute(router, '/login', [], controllers.pages.login)
 helpers.setupPageRoute(router, '/request', [], controllers.pages.request)
+helpers.setupPageRoute(router, '/userdashboard', [], controllers.pages.userdashboard)
 
 module.exports = router;

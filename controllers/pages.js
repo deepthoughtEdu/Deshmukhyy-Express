@@ -12,6 +12,8 @@ pagesController.request = async (req, res) => {
     res.render('deshmukhyyexpress/request', { title: 'Request' });
 }
 
-requestController.getRequests = async (req, res) => {
-	helpers.formatApiResponse(200, res, await apiHandlers.request.getRequests(req));
-};
+pagesController.userdashboard = async (req, res) => {
+    res.render('deshmukhyyexpress/userdashboard', { title: 'User Dashboard' });
+}
+
+
