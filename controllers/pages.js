@@ -9,11 +9,11 @@ pagesController.login = async (req, res) => {
 }
 
 pagesController.request = async (req, res) => {
-    res.render('deshmukhyyexpress/request', { title: 'Request' });
+    res.render('app/request', { title: 'Request' });
 }
 
 pagesController.userdashboard = async (req, res) => {
-    res.render('deshmukhyyexpress/userdashboard', { title: 'User Dashboard' });
+    res.render('app/userdashboard', { title: 'User Dashboard' });
 }
 
 

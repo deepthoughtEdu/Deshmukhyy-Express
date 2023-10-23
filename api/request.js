@@ -1,6 +1,7 @@
 const database = require("../database");
 const { collections } = require("../database");
 const { ObjectId } = require("mongodb");
+const utilities = require("../utilities")
 
 const request = module.exports;
 
@@ -11,7 +12,7 @@ request.createRequest = async (req) => {
     const payload = {
         uid: userId,
         createdAt: new Date().toISOString(),
-        status: 'pending',
+        status: 'approved',
     };
 
     payload.category = category;
@@ -60,4 +61,23 @@ request.getRequests = async (req) => {
         currentPage: page,
         totalDocuments: count,
     };
+};
+
+request.update = async (req) => {
+    const { userId } = req.user;
+    const { status } = req.body;
+    const id = req.params.id; 
+
+    const validStatus = ['approved', 'pending', 'cancelled'];
+    const searchKeys = {userId};
+    const payload = {}
+
+    if(!validStatus.includes(status)) throw new Error("Invalid status supplied!");
+    if(!ObjectId.isvalid(id)) throw new Error("Invalid request ID!")
+
+    searchKeys._id = ObjectId(id);
+    payload.status = status;
+    payload.updatedAt = utilities.getISOTimestamp();
+
+    await database.client.collection(collections.REQUESTS).findOneAndUpdate(searchKeys, payload);
 };

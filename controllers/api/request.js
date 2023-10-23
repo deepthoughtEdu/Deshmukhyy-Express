@@ -10,3 +10,7 @@ requestController.createRequest = async (req, res) => {
 requestController.getRequests = async (req, res) => {
 	helpers.formatApiResponse(200, res, await apiHandlers.request.getRequests(req));
 };
+
+requestController.update = async (req, res) => {
+	helpers.formatApiResponse(200, res, await apiHandlers.request.update(req));
+};
