@@ -5,7 +5,7 @@ const utilities = require("../utilities")
 
 const request = module.exports;
 
-request.createRequest = async (req) => {
+request.create = async (req) => {
     const { userId } = req.user;
     const { category, requirement, time, fare } = req.body;
 
@@ -23,7 +23,7 @@ request.createRequest = async (req) => {
     return await database.client.collection(collections.REQUESTS).insertOne(payload);
 };
 
-request.getRequests = async (req) => {
+request.get = async (req) => {
     const { userId } = req.user;
 
     const limit = parseInt(req.query.limit) || 5;
