@@ -5,9 +5,10 @@ pagesController.moviesSync = require('./movies-sync');
 pagesController.notesNest = require('./notes-nest')
 
 pagesController.getHomePage = async (req, res) => {
+    const title = 'Deepthought';
     const pageData = {
-        title: 'Dashboard',
-        headers: ['Deepthought']
+        title,
+        headers: title.split(' '),
     };
 
     res.render('index', pageData);
