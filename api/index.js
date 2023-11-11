@@ -2,5 +2,6 @@ const api = module.exports;
 
 api.authentication = require('./authentication');
 api.user = require('./user');
-api.request = require('./request');
-api.notes = require('./notes');
+api.deshmukhiExpress = require('./deshmukhi-express');
+api.notesNest = require('./notes-nest');
+api.movieSync = require('./movies-sync');
