@@ -1,0 +1,75 @@
+<%- include("../header") -%>
+
+<link rel="stylesheet" href="/stylesheets/notes-nest/style.css">
+
+<div class="d-flex justify-content-center">
+    <h5>Add new note</h5>
+</div>
+
+<div class="d-flex justify-content-center card-container">
+    <form class="col-12 col-md-6 justify-content-center form-container" id="request-form">
+        <div class="mb-3">
+            <label for="category" class="form-label">
+                Do you want to choose an item or a drop location?
+            </label>
+            <select class="custom-select" name="category">
+                <option selected>Open this select menu</option>
+                <option value="delivery">Item Delivery</option>
+                <option value="drop">Bike or Taxi</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="requirement" class="form-label">
+                Choose item needed or drop location
+            </label>
+            <select class="custom-select" name="requirement">
+                <option selected>Open this select menu</option>
+                <option value="biryani">Biryani</option>
+                <option value="noodles">Noodles</option>
+                <option value="fried-rice">Fried-rice</option>
+                <option value="chapati+curry">Chapati + Curry</option>
+                <option value="bata-singaram">Bata Singaram</option>
+                <option value="abdullapurmet">Abdullapurmet</option>
+                <option value="lbnagar">L B Nagar</option>
+                <option value="pizza">Pizza</option>
+                <option value="cake">Cake</option>
+                <option value="fullmeals">Full meals</option>
+                <option value="bananas">Bananas</option>
+                <option value="apples">Apples</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="time" class="form-label">
+                Choose the time for drop or recieve item
+            </label>
+            <select class="custom-select" name="time">
+                <option selected>Open this select menu</option>
+                <% for (var i=7; i<11; i++) { %>
+                <option value="<%= [i+1] %>:00am">
+                    <%= [i+1] %>:00am
+                </option>
+                <% } %>
+                <% for (var i=1; i<12; i++) { %>
+                <option value="<%= [i+1] %>:00pm">
+                    <%= [i+1] %>:00pm
+                </option>
+                <% } %>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="fare" class="form-label">
+                Please enter fare (in rupees) for the above choice
+            </label>
+            <input type="number" name="fare" class="form-control" placeholder="Fare">
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>
+
+<script src="/javascript/notes-nest/index.js"></script>
+
+<%- include("../footer") -%>
