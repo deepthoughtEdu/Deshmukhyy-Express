@@ -8,4 +8,8 @@ var middlewares = require('../middlewares');
 helpers.setupPageRoute(router, '/', [middlewares.user.requireLogin], controllers.pages.getHomePage)
 helpers.setupPageRoute(router, '/login', [], controllers.pages.login)
 
+helpers.setupPageRoute(router, '/deshmukhi-express', [], controllers.pages.deshmukhiExpress.home);
+helpers.setupPageRoute(router, '/movies-sync', [], controllers.pages.moviesSync.home);
+helpers.setupPageRoute(router, '/notes-nest', [], controllers.pages.notesNest.home);
+
 module.exports = router;
