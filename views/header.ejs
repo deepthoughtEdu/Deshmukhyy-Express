@@ -21,12 +21,19 @@
                         src="https://sdlms.deepthought.education/assets//uploads/files/images/dt_logo.png"
                         class="rounded-circle dt-logo">
                     <div class="ml-2 pt-1">
-                        <span class="header-text1">
-                            DESHMUKHYY 
-                        </span> 
-                        <span class="header-text2"> 
-                            EXPRESS 
-                        </span>
+                        
+                        <% if (headers && headers.length) { %>
+                            <% headers.forEach((element, index) => { %>
+                                <span class="header-text<%= index + 1 %> text-uppercase">
+                                    <%= element %> 
+                                </span> 
+                            <% }) %>
+                        <% } else { %>
+                            <span class="header-text1 text-uppercase">
+                                DeepThought 
+                            </span> 
+                        <% } %>
+                        
                     </div>
                 </div>
             </div>
