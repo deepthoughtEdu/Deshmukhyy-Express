@@ -1,4 +1,6 @@
 module.exports = {
     USERS: 'users',
-    REQUESTS: 'requests'
+    REQUESTS: 'requests',
+    NOTES: 'notes',
+    MOVIES: 'movies'
 }

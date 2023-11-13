@@ -7,7 +7,14 @@ var middlewares = require('../middlewares');
 /* GET home page. */
 helpers.setupPageRoute(router, '/', [middlewares.user.requireLogin], controllers.pages.getHomePage)
 helpers.setupPageRoute(router, '/login', [], controllers.pages.login)
-helpers.setupPageRoute(router, '/app/request', [middlewares.user.requireLogin], controllers.pages.request)
-helpers.setupPageRoute(router, '/app/user/dashboard', [middlewares.user.requireLogin], controllers.pages.userdashboard)
+
+helpers.setupPageRoute(router, '/deshmukhi-express', [], controllers.pages.deshmukhiExpress.home);
+helpers.setupPageRoute(router, '/deshmukhi-express/create', [], controllers.pages.deshmukhiExpress.create);
+
+helpers.setupPageRoute(router, '/movies-sync', [], controllers.pages.moviesSync.home);
+helpers.setupPageRoute(router, '/movies-sync/create', [], controllers.pages.moviesSync.create);
+
+helpers.setupPageRoute(router, '/notes-nest', [], controllers.pages.notesNest.home);
+helpers.setupPageRoute(router, '/notes-nest/create', [], controllers.pages.notesNest.create);
 
 module.exports = router;

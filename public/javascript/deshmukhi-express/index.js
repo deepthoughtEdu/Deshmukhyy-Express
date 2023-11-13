@@ -24,7 +24,7 @@ function initialize() {
             success: function () {
                 Swal.fire(
                     'Success!',
-                    'Your request is updated.',
+                    'Your request is saved successfully.',
                     'success'
                 )
             },
