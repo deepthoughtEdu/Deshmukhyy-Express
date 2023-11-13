@@ -9,6 +9,7 @@ helpers.setupPageRoute(router, '/', [middlewares.user.requireLogin], controllers
 helpers.setupPageRoute(router, '/login', [], controllers.pages.login)
 
 helpers.setupPageRoute(router, '/deshmukhi-express', [], controllers.pages.deshmukhiExpress.home);
+helpers.setupPageRoute(router, '/deshmukhi-express/dashboard', [], controllers.pages.deshmukhiExpress.dashboard);
 helpers.setupPageRoute(router, '/deshmukhi-express/create', [], controllers.pages.deshmukhiExpress.create);
 
 helpers.setupPageRoute(router, '/movies-sync', [], controllers.pages.moviesSync.home);

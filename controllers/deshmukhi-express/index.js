@@ -17,3 +17,12 @@ deshmukhiExpress.create = async (req, res) => {
 
     res.render('deshmukhi-express/create', pageData);
 }
+
+deshmukhiExpress.dashboard = async (req, res) => {
+    const pageData = {
+        headers: ['Deshmukhi', 'Express'],
+        title: 'Dashboard',
+    };
+
+    res.render('deshmukhi-express/dashboard', pageData);
+}
