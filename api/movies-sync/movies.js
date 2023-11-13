@@ -4,21 +4,41 @@ const utilities = require('../../utilities');
 
 const movieApi = module.exports;
 
+//Create API to create a movie show and store details of the show
 movieApi.create = async (request) => {
-    const {user} = request;
-    const {releaseYear, title, genre, rating, director} = request.body;
 
-    const timestamp = utilities.getISOTimestamp();
-    const movie = {};
+/* 
+    Step 1: Getting details about the person making the request.
+    Tech World: Extracting the logged-in user information from the incoming request.
+*/
+    // Write your code here
 
-    movie.uid = user.userId;
-    movie.title = title;
-    movie.genre = genre;
-    movie.rating = rating;
-    movie.director = director;
-    movie.releaseYear = releaseYear;
-    movie.createdAt = timestamp;
-    movie.updatedAt = timestamp;
+/* 
+   Step 2: Getting information about the movie.
+   Tech World: Extracting the variable's data from the incoming request body.
+*/
+    // Write your code here
+    // Variables: releaseYear, movieName, rating, showTime, fare
+    
+/* 
+   Step 3: Making a note of the current time.
+   Tech World: Generating a timestamp using utility function for future reference.
+*/
+    // Write your code here
 
-    return await database.client.collection(collections.MOVIES).insertOne(movie);
+/* 
+   Step 4: Making a record of the movie show.
+   Tech World: Creating a payload object to store information for database insertion.
+*/
+    // Write your code here 
+    // Payload variables: uid, movieName, rating, showTime, releaseYear, fare, createdAt, updatedAt.
+
+/* 
+   Step 5: Saving the movie details.
+   Tech World: Using MongoDB to insert the payload (movie information) into a collection named 'MOVIES.'
+   Additional Info 1: 'database.client.collection' refers to a MongoDB collection and 'collections.MOVIES' holds the collection name
+   Additional Info 2: The 'insertOne' method is used to add a single document to the MongoDB collection.
+*/    
+
+    // Write your code here 
 }
