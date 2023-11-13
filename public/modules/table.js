@@ -88,7 +88,6 @@ class Table {
             method: 'get',
             cache: false,
             success: ({ response }) => {
-                console.log(response);
                     let { from }  = response;
                     $($that.target).html(!response.data.length ? $that.emptyMessage : $that.template.container({
                         html: ($that.template.header({ columns: $that.columns }) + $that.template.body($that.formatter(response.data, from))),

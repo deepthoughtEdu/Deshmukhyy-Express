@@ -46,6 +46,9 @@ function initialize() {
 
     function formatOrderDetailsTableResponse(data, from=0){
         return data.map(function(row,index){
+            let requirement = row.requirement || '';
+            let category = row.category || '';
+
             return {
                 attributes: {
                     id: row._id
@@ -53,8 +56,8 @@ function initialize() {
                 classes:classes.type[row.status],
                 data: {
                     Sno:`${(from + (index + 1))}`,
-                    ordername: row.requirement.charAt(0).toUpperCase() + row.requirement.slice(1),
-                    category: row.category.charAt(0).toUpperCase() + row.category.slice(1),
+                    ordername: requirement.charAt(0).toUpperCase() + requirement.slice(1),
+                    category: category.charAt(0).toUpperCase() + category.slice(1),
                     time: row.time,
                     fare: row.fare,
                     status: getSelect(row.status || 'approved'),
