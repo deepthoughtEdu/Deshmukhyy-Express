@@ -1,7 +1,7 @@
 const templates = {
     table: {
         container: (data) => {
-            return `<table class="m-4 table w-75 ${data.classes || ''}">${data.html || ''}</table>`
+            return `<table class="m-4 table w-100 ${data.classes || ''}">${data.html || ''}</table>`
         },
         header: (data) => {
             return `<thead>

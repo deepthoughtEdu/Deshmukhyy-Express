@@ -41,7 +41,7 @@ function initialize() {
             {title:"Fare",value:'category'},
             {title:"Status",value:'category'},
         ],
-        formatter: formatOrderDetailsTableResponse
+        formatter: formatOrderDetailsTableResponse,
     })
 
     function formatOrderDetailsTableResponse(data, from=0){
@@ -68,6 +68,8 @@ function initialize() {
     }
     
     orderDetailsTable.render(`/api/request`);
+
+
     $('#order-details').on('change','select.status',function(){
         let value = $(this).val();
         let _classes = Object.keys(classes.type).map(e => classes.type[e]).join(' ');
@@ -81,6 +83,9 @@ function initialize() {
         let data = {
             status: value
         }
+
+        // As of now blocking the functionality
+        return
 
         $.ajax({
             url: `/api/request/${id}`,
