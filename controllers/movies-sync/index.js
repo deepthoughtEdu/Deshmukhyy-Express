@@ -1,19 +1,19 @@
-const moviesSync = module.exports;
+const movieSync = module.exports;
 
-moviesSync.home = async (req, res) => {
+movieSync.home = async (req, res) => {
 	const pageData = {
-        title: 'Movies Sync',
-        headers: ['Movies', 'Sync']
+        title: 'Movie Sync',
+        headers: ['Movie', 'Sync']
     };
 
-    res.render('movies-sync/index', pageData);
+    res.render('movie-sync/index', pageData);
 }
 
-moviesSync.create = async (req, res) => {
+movieSync.create = async (req, res) => {
 	const pageData = {
         title: 'Add new movie',
-        headers: ['Movies', 'Sync']
+        headers: ['Movie', 'Sync']
     };
 
-    res.render('movies-sync/create', pageData);
+    res.render('movie-sync/create', pageData);
 }
