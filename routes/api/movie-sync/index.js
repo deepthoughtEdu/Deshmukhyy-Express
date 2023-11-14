@@ -4,6 +4,6 @@ const {setupApiRoute} = require('../../../helpers');
 const controllers = require('../../../controllers');
 const middlewares = require('../../../middlewares');
 
-setupApiRoute(router, 'post', '/', [middlewares.user.authenticateUser, middlewares.checkRequired.bind(null, ['releaseYear', 'title', 'genre', 'rating', 'director'])], controllers.api.moviesSync.create);
+setupApiRoute(router, 'post', '/', [middlewares.user.authenticateUser, middlewares.checkRequired.bind(null, ['releaseYear', 'title', 'genre', 'rating', 'director'])], controllers.api.movieSync.create);
 
 module.exports = router;

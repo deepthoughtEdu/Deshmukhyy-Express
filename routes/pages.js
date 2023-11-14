@@ -9,7 +9,7 @@ helpers.setupPageRoute(router, '/', [middlewares.user.requireLogin], controllers
 helpers.setupPageRoute(router, '/login', [], controllers.pages.login)
 
 helpers.setupPageRoute(router, '/deshmukhi-express', [], controllers.pages.deshmukhiExpress.home);
-helpers.setupPageRoute(router, '/movies-sync', [], controllers.pages.moviesSync.home);
+helpers.setupPageRoute(router, '/movies-sync', [], controllers.pages.movieSync.home);
 helpers.setupPageRoute(router, '/notes-nest', [], controllers.pages.notesNest.home);
 
 module.exports = router;
