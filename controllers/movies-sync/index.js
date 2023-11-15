@@ -9,6 +9,15 @@ moviesSync.home = async (req, res) => {
     res.render('movies-sync/index', pageData);
 }
 
+moviesSync.dashboard = async (req, res) => {
+	const pageData = {
+        title: 'Dashboard',
+        headers: ['Movies', 'Sync']
+    };
+
+    res.render('movies-sync/dashboard', pageData);
+}
+
 moviesSync.create = async (req, res) => {
 	const pageData = {
         title: 'Add new movie',
