@@ -77,5 +77,7 @@ noteApi.update = async (req) => {
         payload.status = status;
     }
 
+    payload.updatedAt = utilities.getISOTimestamp();
+
     await database.client.collection(collections.NOTES).findOneAndUpdate({_id: new ObjectId(id)}, {$set: payload});
 }

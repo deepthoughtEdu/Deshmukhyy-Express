@@ -6,5 +6,6 @@ const middlewares = require('../../../middlewares');
 
 setupApiRoute(router, 'get', '/', [middlewares.user.authenticateUser], controllers.api.moviesSync.get);
 setupApiRoute(router, 'post', '/', [middlewares.user.authenticateUser, middlewares.checkRequired.bind(null, ['releaseYear', 'title', 'genre', 'rating', 'director'])], controllers.api.moviesSync.create);
+setupApiRoute(router, 'put', '/:id', [middlewares.user.authenticateUser], controllers.api.moviesSync.update);
 
 module.exports = router;

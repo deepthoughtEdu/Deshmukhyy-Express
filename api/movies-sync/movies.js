@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const database = require('../../database');
 const {collections} = require('../../database');
 const utilities = require('../../utilities');
@@ -37,4 +38,19 @@ movieApi.get = async (request) => {
     ]);
 
     return utilities.paginate(`/api/movie${request.url}`, movies, count, limit, page);
+}
+
+movieApi.update = async (req) => {
+    const {id} = req.params;
+    const userId = req.user.userId;
+    const payload = {};
+
+    const movie = await database.client.collection(collections.MOVIES).findOne({_id: new ObjectId(id)});
+    if (!movie) {
+        throw new Error('Movie not found');
+    }
+
+    if (movie.uid != userId) {
+        throw new Error('Not authorized to edit');
+    }
 }
