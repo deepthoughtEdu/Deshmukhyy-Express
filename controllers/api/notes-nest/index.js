@@ -3,6 +3,6 @@ const apiHandlers = require('../../../api');
 
 const notesNestController = module.exports;
 
-notesNestController.create = async (req, res) => {
-	helpers.formatApiResponse(200, res, await apiHandlers.notesNest.core.create(req));
+notesNestController.create = async (__, __) => {
+	helpers.formatApiResponse(____, ___, await apiHandlers.______.core.create(___));
 };

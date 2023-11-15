@@ -3,6 +3,6 @@ const apiHandlers = require('../../../api');
 
 const movieSyncController = module.exports;
 
-movieSyncController.create = async (req, res) => {
-	helpers.formatApiResponse(200, res, await apiHandlers.movieSync.core.create(req));
+movieSyncController.create = async (/*Write Your Code here*/) => {
+	helpers.formatApiResponse(/*Write Your Code Here*/);
 };
