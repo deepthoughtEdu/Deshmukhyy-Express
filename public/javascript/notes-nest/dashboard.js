@@ -2,23 +2,23 @@ $(window).on('load', initialize);
 
 const classes = {
     type:{
-        cancelled:"table-danger",
-        approved: "table-success",
-        waiting:  "table-warning"
+        inactive: "table-danger",
+        published: "table-success",
+        draft: "table-warning"
     }
-}
+};
 
-let types = {
-    approved : {
-        label:"Approved",
+const types = {
+    published : {
+        label:"Published",
         isSelected:false
     },
-    waiting : {
-        label:"Wait",
+    draft : {
+        label:"Draft",
         isSelected:false
     },
-    cancelled : {
-        label:"Cancel",
+    inactive : {
+        label:"Inactive",
         isSelected:false
     }
 };
@@ -32,22 +32,23 @@ function getSelect(selected){
 
 function initialize() {
     let orderDetailsTable = new Table({
-        target:'#order-details',
+        target:'#note-details',
         columns:[
             {title:'S.No',value:'sno'},
-            {title:'Requested Orders',value:'order'},
-            {title:"Category",value:'category'},
-            {title:"Time",value:'category'},
-            {title:"Fare",value:'category'},
-            {title:"Status",value:'category'},
+            {title:'Title',value:'title'},
+            {title:'Content',value:'content'},
+            {title:'Subject',value:'Subject'},
+            {title:'Status',value:'status'},
         ],
         formatter: formatOrderDetailsTableResponse,
     })
 
     function formatOrderDetailsTableResponse(data, from=0){
         return data.map(function(row,index){
-            let requirement = row.requirement || '';
-            let category = row.category || '';
+            let content = row.content || '';
+            let title = row.title || '';
+
+            content = String(content).substr(0, 30) + '...';
 
             return {
                 attributes: {
@@ -56,12 +57,10 @@ function initialize() {
                 classes:classes.type[row.status],
                 data: {
                     Sno:`${(from + (index + 1))}`,
-                    ordername: requirement.charAt(0).toUpperCase() + requirement.slice(1),
-                    category: category.charAt(0).toUpperCase() + category.slice(1),
-                    time: row.time,
-                    fare: row.fare,
-                    status: getSelect(row.status || 'approved'),
-                    
+                    title: title,
+                    content: content,
+                    subject: row.subject || 'None',
+                    status: getSelect(row.status || 'published'),
                 }
             }
         })
@@ -70,7 +69,7 @@ function initialize() {
     orderDetailsTable.render(`/api/note`);
 
 
-    $('#order-details').on('change','select.status',function(){
+    $('#note-details').on('change','select.status',function(){
         let value = $(this).val();
         let _classes = Object.keys(classes.type).map(e => classes.type[e]).join(' ');
         let _class = classes.type[value] || "";
@@ -84,11 +83,8 @@ function initialize() {
             status: value
         }
 
-        // As of now blocking the functionality
-        return
-
         $.ajax({
-            url: `/api/request/${id}`,
+            url: `/api/note/${id}`,
             method: 'put',
             cache: false,
             contentType: 'application/json; charset=utf-8',
@@ -97,14 +93,19 @@ function initialize() {
             success: function () {
                 Swal.fire(
                     'Success!',
-                    'Order status updated successfully.',
+                    'Note status updated successfully.',
                     'success'
                 )
             },
-            error: function () {
+            error: function ({responseJSON, statusText}) {
+                let message = statusText;
+                if (responseJSON) {
+                    message = responseJSON.status.message;
+                }
+
                 Swal.fire(
                     'Error!',
-                    'Something went wrong.',
+                    message,
                     'error'
                 );
             }

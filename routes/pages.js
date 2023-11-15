@@ -17,7 +17,7 @@ helpers.setupPageRoute(router, '/movies-sync/dashboard', [], controllers.pages.m
 helpers.setupPageRoute(router, '/movies-sync/create', [], controllers.pages.moviesSync.create);
 
 helpers.setupPageRoute(router, '/notes-nest', [], controllers.pages.notesNest.home);
-helpers.setupPageRoute(router, '/notes-nest/dashboard', [], controllers.pages.moviesSync.dashboard);
+helpers.setupPageRoute(router, '/notes-nest/dashboard', [], controllers.pages.notesNest.dashboard);
 helpers.setupPageRoute(router, '/notes-nest/create', [], controllers.pages.notesNest.create);
 
 module.exports = router;

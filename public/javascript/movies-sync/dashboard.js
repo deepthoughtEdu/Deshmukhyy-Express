@@ -32,22 +32,22 @@ function getSelect(selected){
 
 function initialize() {
     let orderDetailsTable = new Table({
-        target:'#order-details',
+        target:'#movie-details',
         columns:[
             {title:'S.No',value:'sno'},
-            {title:'Requested Orders',value:'order'},
-            {title:"Category",value:'category'},
-            {title:"Time",value:'category'},
-            {title:"Fare",value:'category'},
-            {title:"Status",value:'category'},
+            {title:'Name',value:'name'},
+            {title:"Genre",value:'genre'},
+            {title:"Director",value:'director'},
+            {title:"Release Year",value:'releaseYear'},
+            {title:"Status",value:'status'},
         ],
         formatter: formatOrderDetailsTableResponse,
     })
 
     function formatOrderDetailsTableResponse(data, from=0){
         return data.map(function(row,index){
-            let requirement = row.requirement || '';
-            let category = row.category || '';
+            let title = row.title || '';
+            let genre = row.genre || '';
 
             return {
                 attributes: {
@@ -56,10 +56,10 @@ function initialize() {
                 classes:classes.type[row.status],
                 data: {
                     Sno:`${(from + (index + 1))}`,
-                    ordername: requirement.charAt(0).toUpperCase() + requirement.slice(1),
-                    category: category.charAt(0).toUpperCase() + category.slice(1),
-                    time: row.time,
-                    fare: row.fare,
+                    title: title.charAt(0).toUpperCase() + title.slice(1),
+                    genre: genre.charAt(0).toUpperCase() + genre.slice(1),
+                    director: row.director,
+                    releaseYear: row.releaseYear,
                     status: getSelect(row.status || 'approved'),
                     
                 }
