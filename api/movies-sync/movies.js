@@ -1,11 +1,15 @@
+const { ObjectId } = require('mongodb');
 const database = require('../../database');
 const {collections} = require('../../database');
 const utilities = require('../../utilities');
 
 const movieApi = module.exports;
 
-//Create API to create a movie show and store details of the show
+const validMovieStatuses = ['cancelled', 'waiting', 'confirmed'];
+
 movieApi.create = async (request) => {
+    const {user} = request;
+    const {releaseYear, title, rating, director, fare, showTime} = request.body;
 
 /* 
     Step 1: Getting details about the person making the request.
@@ -13,32 +17,65 @@ movieApi.create = async (request) => {
 */
     // Write your code here
 
-/* 
-   Step 2: Getting information about the movie.
-   Tech World: Extracting the variable's data from the incoming request body.
-*/
-    // Write your code here
-    // Variables: releaseYear, movieName, rating, showTime, fare
-    
-/* 
-   Step 3: Making a note of the current time.
-   Tech World: Generating a timestamp using utility function for future reference.
-*/
-    // Write your code here
+    movie.uid = user.userId;
+    movie.title = title;
+    movie.rating = rating;
+    movie.director = director;
+    movie.releaseYear = releaseYear;
+    movie.fare = fare;
+    movie.showTime = showTime;
+    movie.createdAt = timestamp;
+    movie.updatedAt = timestamp;
 
-/* 
-   Step 4: Making a record of the movie show.
-   Tech World: Creating a payload object to store information for database insertion.
-*/
-    // Write your code here 
-    // Payload variables: uid, movieName, rating, showTime, releaseYear, fare, createdAt, updatedAt.
+    return await database.client.collection(collections.MOVIES).insertOne(movie);
+}
 
-/* 
-   Step 5: Saving the movie details.
-   Tech World: Using MongoDB to insert the payload (movie information) into a collection named 'MOVIES.'
-   Additional Info 1: 'database.client.collection' refers to a MongoDB collection and 'collections.MOVIES' holds the collection name
-   Additional Info 2: The 'insertOne' method is used to add a single document to the MongoDB collection.
-*/    
+movieApi.get = async (request) => {
+    const { userId } = request.user;
 
-    // Write your code here 
+    const limit = parseInt(request.query.limit) || 10;
+    const page = parseInt(request.query.page) || 0;
+    const offset = page*limit;
+    const key = { uid: userId }
+
+    const [movies, count] = await Promise.all([
+        database.client.collection(collections.MOVIES).find(key).skip(offset).limit(limit).toArray(),
+        database.client.collection(collections.MOVIES).countDocuments(key)
+    ]);
+
+    return utilities.paginate(`/api/movie${request.url}`, movies, count, limit, page);
+}
+
+movieApi.update = async (req) => {
+    const {id} = req.params;
+    const userId = req.user.userId;
+    const {status} = req.body;
+    const payload = {};
+
+    if (!ObjectId.isValid(id)) {
+        throw new Error('Invalid id supplied');
+    }
+
+    const movie = await database.client.collection(collections.MOVIES).findOne({_id: new ObjectId(id)});
+    if (!movie) {
+        throw new Error('Movie not found');
+    }
+
+    ['title', 'rating', 'director', 'releaseYear', 'fare', 'showTime'].forEach(field => {
+        if (req.body[field]) {
+            payload[field] = req.body[field];
+        }
+    });
+
+    if (status) {
+        if (!validMovieStatuses.includes(status)) {
+            throw new Error('Invalid status: ' + status);
+        }
+
+        payload.status = status;
+    }
+
+    payload.updatedAt = utilities.getISOTimestamp();
+
+    await database.client.collection(collections.MOVIES).findOneAndUpdate({_id: new ObjectId(id)}, {$set: payload});
 }

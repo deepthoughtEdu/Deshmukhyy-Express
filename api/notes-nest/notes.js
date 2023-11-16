@@ -1,47 +1,82 @@
+const { ObjectId } = require('mongodb');
 const database = require('../../database');
 const {collections} = require('../../database');
 const utilities = require('../../utilities');
+
+const validNoteStatuses = ['published', 'draft', 'inactive'];
+const defaultNoteStatus = 'draft';
 
 const noteApi = module.exports;
 
 // Create API to create a note and store details of the note
 noteApi.create = async (request) => {
-
-/*
-    Step-1: Get the user ID from the person who is using the application.
-    Tech World: Extracting the logged-in user information from the incoming request.
-*/
-    const {userId} = ___________;
-
-/* 
-   Step 2: Getting information about the note.
-   Tech World: Extracting the variable's data from the incoming request body.
-*/
-    const {content, __________} = _____________;
-    // Variables: content, title
-    
-/* 
-   Step 3: Making a note of the current time.
-   Tech World: Generating a timestamp using utility function for future reference.
-*/
-    const timestamp = ________________;
-
-/* 
-   Step 4: Making a record of the note.
-   Tech World: Creating a payload object to store information for database insertion.
-*/
+    const {user} = request;
+    const {content, title, subject, status} = request.body;
     const note = {};
-    note.uid = ___________;  // Assigning the user ID to the payload
-    note.title = ____________;
-    note.content = content;
-    note.__________ = timestamp; // Assigning the current timestamp to the payload
-    note.updatedAt = ____________;
 
-/* 
-   Step 5: Saving the note details.
-   Tech World: Using MongoDB to insert the payload (note information) into a collection named 'NOTES.'
-   Additional Info 1: 'database.client.collection' refers to a MongoDB collection and 'collections.NOTES' holds the collection name
-   Additional Info 2: The 'insertOne' method is used to add a single document to the MongoDB collection.
-*/
-    return await database.client.collection(________________).insertOne(_____________);
+    if (status) {
+        if (!validNoteStatuses.includes(status)) {
+            throw new Error('Invalid status: ' + status);
+        }
+    }
+
+    note.uid = user.userId;
+    note.title = title;
+    note.content = content;
+    note.subject = subject;
+    note.status = status || defaultNoteStatus;
+    note.createdAt = timestamp;
+    note.updatedAt = timestamp;
+
+    return await database.client.collection(collections.NOTES).insertOne(note);
+}
+
+noteApi.get = async (request) => {
+    const { userId } = request.user;
+
+    const limit = parseInt(request.query.limit) || 5;
+    const page = parseInt(request.query.page) || 0;
+
+    const offset = page*limit;
+    const key = { uid: userId };
+
+    const [notes, count] = await Promise.all([
+        database.client.collection(collections.NOTES).find(key).skip(offset).limit(limit).toArray(),
+        database.client.collection(collections.NOTES).countDocuments(key)
+    ]);
+
+    return utilities.paginate(`/api/note${request.url}`, notes, count, limit, page);
+}
+
+noteApi.update = async (req) => {
+    const {id} = req.params;
+    const userId = req.user.userId;
+    const {status} = req.body;
+    const payload = {};
+
+    const note = await database.client.collection(collections.NOTES).findOne({_id: new ObjectId(id)});
+    if (!note) {
+        throw new Error('Note not found');
+    }
+
+    if (note.uid != userId) {
+        throw new Error('Not authorized to edit this note');
+    }
+
+    ['title', 'content', 'subject'].forEach(elem => {
+        if (req.body[elem]) {
+            payload[elem] = req.body[elem];;
+        }
+    });
+
+    if (status) {
+        if (!validNoteStatuses.includes(status)) {
+            throw new Error('Invalid status: ' + status);
+        }
+        payload.status = status;
+    }
+
+    payload.updatedAt = utilities.getISOTimestamp();
+
+    await database.client.collection(collections.NOTES).findOneAndUpdate({_id: new ObjectId(id)}, {$set: payload});
 }
