@@ -7,17 +7,18 @@ const movieApi = module.exports;
 
 movieApi.create = async (request) => {
     const {user} = request;
-    const {releaseYear, title, genre, rating, director} = request.body;
+    const {releaseYear, title, rating, director, fare, showTime} = request.body;
 
     const timestamp = utilities.getISOTimestamp();
     const movie = {};
 
     movie.uid = user.userId;
     movie.title = title;
-    movie.genre = genre;
     movie.rating = rating;
     movie.director = director;
     movie.releaseYear = releaseYear;
+    movie.fare = fare;
+    movie.showTime = showTime;
     movie.createdAt = timestamp;
     movie.updatedAt = timestamp;
 

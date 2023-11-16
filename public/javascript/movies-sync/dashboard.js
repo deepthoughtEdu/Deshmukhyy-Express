@@ -3,29 +3,29 @@ $(window).on('load', initialize);
 const classes = {
     type:{
         cancelled:"table-danger",
-        approved: "table-success",
+        confirmed: "table-success",
         waiting:  "table-warning"
     }
 }
 
-let types = {
-    approved : {
-        label:"Approved",
+const types = {
+    confirmed : {
+        label:"Confirmed",
         isSelected:false
     },
     waiting : {
-        label:"Wait",
+        label:"Waiting",
         isSelected:false
     },
     cancelled : {
-        label:"Cancel",
+        label:"Cancelled",
         isSelected:false
     }
 };
 
 function getSelect(selected){
   let html =  Object.keys(types).map(type => {
-        return ` <option ${type == selected ? 'selected="true"' : ""} value="${type}">${types[type].label}</option>`
+        return ` <option ${type == selected ? 'selected' : ""} value="${type}">${types[type].label}</option>`
   }).join('');
   return  `<select class="custom-select status" name="status">${html}</select>`
 }
@@ -36,9 +36,10 @@ function initialize() {
         columns:[
             {title:'S.No',value:'sno'},
             {title:'Name',value:'name'},
-            {title:"Genre",value:'genre'},
-            {title:"Director",value:'director'},
             {title:"Release Year",value:'releaseYear'},
+            {title:"Rating",value:'rating'},
+            {title:"ShowTime",value:'showTime'},
+            {title:"Fare",value:'fare'},
             {title:"Status",value:'status'},
         ],
         formatter: formatOrderDetailsTableResponse,
@@ -47,7 +48,6 @@ function initialize() {
     function formatOrderDetailsTableResponse(data, from=0){
         return data.map(function(row,index){
             let title = row.title || '';
-            let genre = row.genre || '';
 
             return {
                 attributes: {
@@ -57,10 +57,11 @@ function initialize() {
                 data: {
                     Sno:`${(from + (index + 1))}`,
                     title: title.charAt(0).toUpperCase() + title.slice(1),
-                    genre: genre.charAt(0).toUpperCase() + genre.slice(1),
-                    director: row.director,
                     releaseYear: row.releaseYear,
-                    status: getSelect(row.status || 'approved'),
+                    rating: row.rating,
+                    showTime: row.showTime,
+                    fare: row.fare,
+                    status: getSelect(row.status || 'confirmed'),
                     
                 }
             }

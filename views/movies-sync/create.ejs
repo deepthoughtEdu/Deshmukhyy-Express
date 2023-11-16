@@ -12,10 +12,6 @@
             <label for="title" class="form-label">Title for the movie</label>
             <input required type="text" class="form-control" placeholder="Enter title" name="title" id="title">
         </div>
-        <div class="mb-3">
-            <label for="genre" class="form-label">Genre of the movie</label>
-            <input required type="text" class="form-control" placeholder="Enter genre" name="genre" id="genre">
-        </div>
 
         <div class="mb-3">
             <label for="rating-selector" class="form-label">
@@ -26,13 +22,23 @@
         </div>
 
         <div class="mb-3">
-            <label for="director" class="form-label">Director</label>
-            <input required type="text" class="form-control" placeholder="Enter director's name" name="director" id="director">
+            <label for="showTime" class="form-label">Show time (when the movie starts)</label>
+            <input required type="time" class="form-control" name="showTime" id="showTime">
+        </div>
+
+        <div class="mb-3">
+            <label for="fare" class="form-label">Ticket price</label>
+            <input required type="number" min="1" step="1" class="form-control" placeholder="Enter price for tickets" name="fare" id="fare">
         </div>
 
         <div class="mb-3">
             <label for="year" class="form-label">Year of the movie</label>
-            <input required type="number" class="form-control" placeholder="Enter year of release" name="releaseYear" id="year">
+            <input required type="number" min="1800" max="2030" step="1" class="form-control" placeholder="Enter year of release" name="releaseYear" id="year">
+        </div>
+
+        <div class="mb-3">
+            <label for="director" class="form-label">Director (optional)</label>
+            <input type="text" class="form-control" placeholder="Enter director's name" name="director" id="director">
         </div>
 
         <div class="d-flex justify-content-center">
