@@ -5,6 +5,8 @@ const utilities = require('../../utilities');
 
 const movieApi = module.exports;
 
+const validMovieStatuses = ['cancelled', 'waiting', 'confirmed'];
+
 movieApi.create = async (request) => {
     const {user} = request;
     const {releaseYear, title, rating, director, fare, showTime} = request.body;
@@ -44,14 +46,33 @@ movieApi.get = async (request) => {
 movieApi.update = async (req) => {
     const {id} = req.params;
     const userId = req.user.userId;
+    const {status} = req.body;
     const payload = {};
+
+    if (!ObjectId.isValid(id)) {
+        throw new Error('Invalid id supplied');
+    }
 
     const movie = await database.client.collection(collections.MOVIES).findOne({_id: new ObjectId(id)});
     if (!movie) {
         throw new Error('Movie not found');
     }
 
-    if (movie.uid != userId) {
-        throw new Error('Not authorized to edit');
+    ['title', 'rating', 'director', 'releaseYear', 'fare', 'showTime'].forEach(field => {
+        if (req.body[field]) {
+            payload[field] = req.body[field];
+        }
+    });
+
+    if (status) {
+        if (!validMovieStatuses.includes(status)) {
+            throw new Error('Invalid status: ' + status);
+        }
+
+        payload.status = status;
     }
+
+    payload.updatedAt = utilities.getISOTimestamp();
+
+    await database.client.collection(collections.MOVIES).findOneAndUpdate({_id: new ObjectId(id)}, {$set: payload});
 }

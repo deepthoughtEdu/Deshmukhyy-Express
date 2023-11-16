@@ -71,7 +71,7 @@ function initialize() {
     orderDetailsTable.render(`/api/movie`);
 
 
-    $('#order-details').on('change','select.status',function(){
+    $('#movie-details').on('change','select.status',function(){
         let value = $(this).val();
         let _classes = Object.keys(classes.type).map(e => classes.type[e]).join(' ');
         let _class = classes.type[value] || "";
@@ -85,11 +85,8 @@ function initialize() {
             status: value
         }
 
-        // As of now blocking the functionality
-        return
-
         $.ajax({
-            url: `/api/request/${id}`,
+            url: `/api/movie/${id}`,
             method: 'put',
             cache: false,
             contentType: 'application/json; charset=utf-8',
@@ -98,14 +95,19 @@ function initialize() {
             success: function () {
                 Swal.fire(
                     'Success!',
-                    'Order status updated successfully.',
+                    'Movie status updated successfully.',
                     'success'
                 )
             },
-            error: function () {
+            error: function ({responseJSON, statusText}) {
+                let message = statusText;
+                if (responseJSON) {
+                    message = responseJSON.status.message;
+                }
+
                 Swal.fire(
                     'Error!',
-                    'Something went wrong.',
+                    message,
                     'error'
                 );
             }
