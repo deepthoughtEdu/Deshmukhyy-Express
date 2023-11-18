@@ -34,17 +34,18 @@ function initialize() {
     let orderDetailsTable = new Table({
         target:'#order-details',
         columns:[
-            {title:'S.No',value:'sno'},
-            {title:'Requested Orders',value:'order'},
-            {title:"Category",value:'category'},
-            {title:"Time",value:'category'},
-            {title:"Fare",value:'category'},
-            {title:"Status",value:'category'},
+            {title:'S.No'},
+            {title:'Orders'},
+            {title:"Category"},
+            {title:"Time"},
+            {title:"Fare"},
+            {title:"Ordered by"},
+            {title:"Status"},
         ],
-        formatter: formatOrderDetailsTableResponse
+        formatter: formatTableResponse
     })
 
-    function formatOrderDetailsTableResponse(data, from=0){
+    function formatTableResponse(data, from=0){
         return data.map(function(row,index){
             return {
                 attributes: {
@@ -57,6 +58,7 @@ function initialize() {
                     category: row.category.charAt(0).toUpperCase() + row.category.slice(1),
                     time: row.time,
                     fare: row.fare,
+                    orderedby: row.user.username,
                     status: getSelect(row.status || 'approved'),
                     
                 }

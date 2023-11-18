@@ -23,15 +23,23 @@ request.create = async (req) => {
 };
 
 request.get = async (req) => {
-    const { userId } = req.user;
-
+    
     const limit = parseInt(req.query.limit) || 5;
     const page = parseInt(req.query.page) || 0;
     const offset = page*limit;
-    const key = {uid:userId}
+    const key = {}
 
-    const count = await database.client.collection(collections.REQUESTS).countDocuments(key);
-    const collection = await database.client.collection(collections.REQUESTS).find(key).skip(offset).limit(limit).toArray();
+    const [count, requests] = await Promise.all([
+        database.client.collection(collections.REQUESTS).countDocuments(key),
+        database.client.collection(collections.REQUESTS).find(key).skip(offset).limit(limit).toArray()
+    ]);
+
+    const collection = await Promise.all(requests.map(async item => {
+        const {uid} = item;
+        const user = await database.client.collection(collections.USERS).findOne({userId: uid});
+        item.user = utilities.filterObjectByKeys(user, ['username', 'email'])
+        return item;
+    }));
 
     return utilities.paginate(`/api/request${req.url}`, collection, count, limit, page);
 };
