@@ -167,3 +167,26 @@ utiities.isAValidUrl = function isAValidUrl (url, protocols=['http', 'https']) {
         return false;
     }
 };
+
+utiities.filterObjectByKeys = function (object={}, keys=[]) {
+	if (!keys) {
+		keys = [];
+	}
+	if (!Array.isArray(keys)) {
+		throw new Error('Keys must be an array');
+	}
+
+	var filtered = {};
+
+	if (keys.length) {
+		Object.keys(object).forEach(key => {
+			if (keys.includes(key)) {
+				filtered[key] = object[key]
+			}
+		});
+	} else {
+		filtered = object;
+	}
+
+	return filtered;
+}
