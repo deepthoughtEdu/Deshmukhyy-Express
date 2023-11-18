@@ -31,9 +31,9 @@ request.get = async (req) => {
     const key = {uid:userId}
 
     const count = await database.client.collection(collections.REQUESTS).countDocuments(key);
-    const requests = await database.client.collection(collections.REQUESTS).find(key).skip(offset).limit(limit).toArray();
+    const collection = await database.client.collection(collections.REQUESTS).find(key).skip(offset).limit(limit).toArray();
 
-    return utilities.paginate(`/api/request${req.url}`, requests, count, limit, page);
+    return utilities.paginate(`/api/request${req.url}`, collection, count, limit, page);
 };
 
 request.update = async (req) => {
