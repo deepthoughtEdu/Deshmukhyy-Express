@@ -15,14 +15,15 @@ deshmukhiExpress.create = async (req, res) => {
         title: 'New request',
     };
 
-    res.render('deshmukhi-express/create', pageData);
+    res.render('deshmukhi-express/user', pageData);
 }
 
 deshmukhiExpress.dashboard = async (req, res) => {
     const pageData = {
         headers: ['Deshmukhi', 'Express'],
         title: 'Dashboard',
+        user: req.user
     };
 
-    res.render('deshmukhi-express/dashboard', pageData);
+    res.render('deshmukhi-express/delivery-partner', pageData);
 }

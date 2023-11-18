@@ -10,3 +10,7 @@ deshmukhiExpressController.create = async (req, res) => {
 deshmukhiExpressController.get = async (req, res) => {
 	helpers.formatApiResponse(200, res, await apiHandlers.deshmukhiExpress.core.get(req));
 };
+
+deshmukhiExpressController.updateStatus = async (req, res) => {
+	helpers.formatApiResponse(200, res, await apiHandlers.deshmukhiExpress.core.updateStatus(req));
+};
