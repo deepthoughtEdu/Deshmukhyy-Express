@@ -14,3 +14,7 @@ deshmukhiExpressController.get = async (req, res) => {
 deshmukhiExpressController.updateStatus = async (req, res) => {
 	helpers.formatApiResponse(200, res, await apiHandlers.deshmukhiExpress.core.updateStatus(req));
 };
+
+deshmukhiExpressController.rate = async (req, res) => {
+	helpers.formatApiResponse(200, res, await apiHandlers.deshmukhiExpress.core.rate(req));
+};
