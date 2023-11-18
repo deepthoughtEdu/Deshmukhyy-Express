@@ -3,7 +3,6 @@ const deshmukhiExpress = module.exports;
 deshmukhiExpress.home = async (req, res) => {
     const pageData = {
         title: 'Deshmukhi Express',
-        headers: ['Deshmukhi', 'Express'],
     };
 
     res.render('deshmukhi-express/index', pageData);
@@ -11,7 +10,6 @@ deshmukhiExpress.home = async (req, res) => {
 
 deshmukhiExpress.create = async (req, res) => {
     const pageData = {
-        headers: ['Deshmukhi', 'Express'],
         title: 'New request',
     };
 
@@ -20,7 +18,6 @@ deshmukhiExpress.create = async (req, res) => {
 
 deshmukhiExpress.dashboard = async (req, res) => {
     const pageData = {
-        headers: ['Deshmukhi', 'Express'],
         title: 'Dashboard',
     };
 

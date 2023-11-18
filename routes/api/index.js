@@ -9,13 +9,9 @@ var router = express.Router();
 const authenticationRoutes = require('./authentication');
 const userRoutes = require('./user');
 const deshmukhiExpressRoutes = require('./deshmukhi-express');
-const moviesSyncRoutes = require('./movies-sync');
-const notesNestRoutes = require('./notes-nest');
 
 router.use('/auth', authenticationRoutes);
 router.use('/user', userRoutes);
 router.use('/request', deshmukhiExpressRoutes);
-router.use('/note', notesNestRoutes);
-router.use('/movie', moviesSyncRoutes);
 
 module.exports = router;
