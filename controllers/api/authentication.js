@@ -1,6 +1,6 @@
 const passport = require('passport');
 const helpers = require('../../helpers');
-const apiHandlers = require('../../api');
+const apiHandlers = require('../../business-logic');
 
 const authenticationController = module.exports;
 

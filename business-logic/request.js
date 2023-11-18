@@ -13,12 +13,11 @@ request.create = async (req) => {
         uid: userId,
         createdAt: new Date().toISOString(),
         status: 'approved',
+        category: category,
+        time: time,
+        fare: fare,
+        requirement: requirement
     };
-
-    payload.category = category;
-    payload.time = time;
-    payload.fare = fare;
-    payload.requirement = requirement;
 
     return await database.client.collection(collections.REQUESTS).insertOne(payload);
 };

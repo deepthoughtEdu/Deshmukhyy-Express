@@ -1,5 +1,5 @@
 const helpers = require('../../helpers');
-const apiHandlers = require('../../api');
+const apiHandlers = require('../../business-logic');
 
 const requestController = module.exports;
 

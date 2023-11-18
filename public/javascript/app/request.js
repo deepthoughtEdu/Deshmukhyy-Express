@@ -8,14 +8,16 @@ function initialize() {
         const formData = {};
         const data = $(this).serializeArray();
 
+        console.log(data);//experiment
+
         data.forEach(({ name, value }) => {
             formData[name] = value;
         })
 
-        console.log(formData)
+        console.log(formData) //experiments
 
         $.ajax({
-            url: '/api/request',
+            url: '/api/request', //change the api route
             method: 'post',
             cache: false,
             contentType: 'application/json; charset=utf-8',
