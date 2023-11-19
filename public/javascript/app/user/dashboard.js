@@ -10,7 +10,7 @@ const classes = {
 
 let types = {
     interested : {
-        label:"Intrested",
+        label:"Interested",
         isSelected:false
     },
     waiting : {
@@ -18,7 +18,7 @@ let types = {
         isSelected:true
     },
     notInterested : {
-        label:"Not Intrested",
+        label:"Not Interested",
         isSelected:false
     }
 };
@@ -38,9 +38,9 @@ function initialize() {
             {title:"Movie"},
             {title:"Category"},
             {title:"Time"},
-            {title:"Duration(hr)"},
+            {title:"Duration"},
             {title:"Fare"},
-            {title:"Organized by"},
+            {title:"Organizer"},
             {title:"Status"},
         ],
         formatter: formatTableResponse
@@ -53,13 +53,13 @@ function initialize() {
                 attributes: {
                     id: row._id
                 },
-                classes:classes.type[row.status],
+                classes: classes.type[row.status],
                 data: {
                     Sno:`${(from + (index + 1))}`,
                     ordername: row.moviename,
                     category: row.category.charAt(0).toUpperCase() + row.category.slice(1),
                     time: row.time,
-                    duration: row.duration,
+                    duration: row.duration + ' hour',
                     fare: row.fare,
                     organizedby: row.user.username,
                     status: getSelect(row.status || 'waiting'),
@@ -70,6 +70,7 @@ function initialize() {
     }
     
     orderDetailsTable.render(`/api/app`);
+
     $('#show-details').on('change','select.status',function(){
         let value = $(this).val();
         let _classes = Object.keys(classes.type).map(e => classes.type[e]).join(' ');

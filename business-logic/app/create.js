@@ -38,7 +38,8 @@ create.logic = async (req) => {
         duration: duration,
         fare: fare,
         createdAt: timestamp,
-        updatedAt: timestamp
+        updatedAt: timestamp,
+        status: 'waiting'
     };
 
     /* 
