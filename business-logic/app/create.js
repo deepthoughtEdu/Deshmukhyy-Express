@@ -1,5 +1,6 @@
 const database = require("../../database");
 const { collections } = require("../../database");
+const utilities = require("../../utilities");
 
 const create = module.exports;
 
@@ -18,6 +19,12 @@ create.logic = async (req) => {
 */
     const { category, requirement, time, fare } = req.body;
 
+/* 
+    Step-4: Making a note of the current time.
+    Tech World: Generating a timestamp using utility function for future reference.
+*/
+    const timestamp = utilities.getISOTimestamp();
+
 /*
     Step-3: Making a package with the user's ID, current time, and an initial 'approved' status.
     Tech World: Creating a payload object to store information for database insertion. 
@@ -30,7 +37,10 @@ create.logic = async (req) => {
         category: category,
         time: time,
         fare: fare,
-        requirement: requirement
+        requirement: requirement,
+        createdAt: timestamp,
+        updatedAt: timestamp
+
     };
 
 /* 
