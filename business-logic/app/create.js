@@ -29,7 +29,6 @@ create.logic = async (req) => {
         Step-4: Making a package with the user's ID, current time, and an initial 'approved' status.
         Tech World: Creating a payload object to store information for database insertion. 
     */
-
     const movie = {
         uid: userId,
         movieName: movieName,
@@ -47,6 +46,5 @@ create.logic = async (req) => {
     Additional Info 1: 'database.client.collection' refers to a MongoDB collection and 'collections.MOVIES' holds the collection name
     Additional Info 2: The 'insertOne' method is used to add a single document to the MongoDB collection.
     */
-
     return await database.client.collection(collections.MOVIES).insertOne(movie);
 };
