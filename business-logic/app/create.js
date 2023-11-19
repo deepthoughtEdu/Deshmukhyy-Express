@@ -17,7 +17,7 @@ create.logic = async (req) => {
         Step-2: Taking details like category, requirement, time, and fare from the user's request
         Tech World: Extracting the variable's data from the incoming request body 
     */
-    const { movieName, category, showTime, duration, fare } = req.body;
+    const { moviename, category, time, duration, fare } = req.body;
 
     /* 
         Step-4: Making a note of the current time.
@@ -32,9 +32,9 @@ create.logic = async (req) => {
 
     const movie = {
         uid: userId,
-        movieName: movieName,
+        moviename: moviename,
         category: category,
-        showTime: showTime,
+        time: time,
         duration: duration,
         fare: fare,
         createdAt: timestamp,

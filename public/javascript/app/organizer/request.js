@@ -2,7 +2,7 @@ $(window).on('load', initialize);
 
 function initialize() {
 
-    $('#request-form').on('submit', function (e) {
+    $('#create-show-form').on('submit', function (e) {
         e.preventDefault();
 
         const formData = {};

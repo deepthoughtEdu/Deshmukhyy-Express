@@ -2,22 +2,22 @@ $(window).on('load', initialize);
 
 const classes = {
     type:{
-        NotIntrested:"table-danger",
-        Intrested: "table-success",
-        // waiting:  "table-warning"
+        notInterested:"table-danger",
+        interested:"table-success",
+        waiting:"table-warning"
     }
 }
 
 let types = {
-    Intrested : {
+    interested : {
         label:"Intrested",
         isSelected:false
     },
-    // waiting : {
-    //     label:"Wait",
-    //     isSelected:false
-    // },
-    NotIntrested : {
+    waiting : {
+        label:"Waiting",
+        isSelected:true
+    },
+    notInterested : {
         label:"Not Intrested",
         isSelected:false
     }
@@ -32,20 +32,22 @@ function getSelect(selected){
 
 function initialize() {
     let orderDetailsTable = new Table({
-        target:'#order-details',
+        target:'#show-details',
         columns:[
-            {title:'S.No'},
-            {title:'Orders'},
+            {title:"S.No"},
+            {title:"Movie"},
             {title:"Category"},
             {title:"Time"},
+            {title:"Duration(hr)"},
             {title:"Fare"},
-            {title:"Ordered by"},
+            {title:"Organized by"},
             {title:"Status"},
         ],
         formatter: formatTableResponse
     })
 
     function formatTableResponse(data, from=0){
+        console.log(data);
         return data.map(function(row,index){
             return {
                 attributes: {
@@ -54,12 +56,13 @@ function initialize() {
                 classes:classes.type[row.status],
                 data: {
                     Sno:`${(from + (index + 1))}`,
-                    ordername: row.requirement.charAt(0).toUpperCase() + row.requirement.slice(1),
+                    ordername: row.moviename,
                     category: row.category.charAt(0).toUpperCase() + row.category.slice(1),
                     time: row.time,
+                    duration: row.duration,
                     fare: row.fare,
-                    orderedby: row.user.username,
-                    status: getSelect(row.status || 'approved'),
+                    organizedby: row.user.username,
+                    status: getSelect(row.status || 'waiting'),
                     
                 }
             }
@@ -67,7 +70,7 @@ function initialize() {
     }
     
     orderDetailsTable.render(`/api/app`);
-    $('#order-details').on('change','select.status',function(){
+    $('#show-details').on('change','select.status',function(){
         let value = $(this).val();
         let _classes = Object.keys(classes.type).map(e => classes.type[e]).join(' ');
         let _class = classes.type[value] || "";
