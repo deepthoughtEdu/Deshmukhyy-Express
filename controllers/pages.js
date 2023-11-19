@@ -1,8 +1,7 @@
 const pagesController = module.exports;
 
 pagesController.deshmukhiExpress = require('./deshmukhi-express');
-pagesController.moviesSync = require('./movies-sync');
-pagesController.notesNest = require('./notes-nest')
+
 
 pagesController.getHomePage = async (req, res) => {
     const title = 'Deepthought';

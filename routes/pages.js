@@ -12,12 +12,12 @@ helpers.setupPageRoute(router, '/deshmukhi-express', [], controllers.pages.deshm
 helpers.setupPageRoute(router, '/deshmukhi-express/dashboard', [], controllers.pages.deshmukhiExpress.dashboard);
 helpers.setupPageRoute(router, '/deshmukhi-express/create', [], controllers.pages.deshmukhiExpress.create);
 
-helpers.setupPageRoute(router, '/movies-sync', [], controllers.pages.moviesSync.home);
-helpers.setupPageRoute(router, '/movies-sync/dashboard', [], controllers.pages.moviesSync.dashboard);
-helpers.setupPageRoute(router, '/movies-sync/create', [], controllers.pages.moviesSync.create);
+// helpers.setupPageRoute(router, '/movies-sync', [], controllers.pages.moviesSync.home);
+// helpers.setupPageRoute(router, '/movies-sync/dashboard', [], controllers.pages.moviesSync.dashboard);
+// helpers.setupPageRoute(router, '/movies-sync/create', [], controllers.pages.moviesSync.create);
 
-helpers.setupPageRoute(router, '/notes-nest', [], controllers.pages.notesNest.home);
-helpers.setupPageRoute(router, '/notes-nest/dashboard', [], controllers.pages.notesNest.dashboard);
-helpers.setupPageRoute(router, '/notes-nest/create', [], controllers.pages.notesNest.create);
+// helpers.setupPageRoute(router, '/notes-nest', [], controllers.pages.notesNest.home);
+// helpers.setupPageRoute(router, '/notes-nest/dashboard', [], controllers.pages.notesNest.dashboard);
+// helpers.setupPageRoute(router, '/notes-nest/create', [], controllers.pages.notesNest.create);
 
 module.exports = router;
