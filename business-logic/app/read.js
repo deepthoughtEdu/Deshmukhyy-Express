@@ -12,8 +12,8 @@ read.logic = async (req) => {
     const key = {}
 
     const [count, requests] = await Promise.all([
-        database.client.collection(collections.REQUESTS).countDocuments(key),
-        database.client.collection(collections.REQUESTS).find(key).skip(offset).limit(limit).toArray()
+        database.client.collection(collections.MOVIE).countDocuments(key),
+        database.client.collection(collections.MOVIE).find(key).skip(offset).limit(limit).toArray()
     ]);
 
     const collection = await Promise.all(requests.map(async item => {

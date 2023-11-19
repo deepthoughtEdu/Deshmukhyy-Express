@@ -21,5 +21,5 @@ update.logic = async (req) => {
     payload.status = status;
     payload.updatedAt = utilities.getISOTimestamp();
 
-    await database.client.collection(collections.REQUESTS).findOneAndUpdate(searchKeys, { $set: payload });
+    await database.client.collection(collections.MOVIE).findOneAndUpdate(searchKeys, { $set: payload });
 };

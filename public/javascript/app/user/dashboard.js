@@ -2,23 +2,23 @@ $(window).on('load', initialize);
 
 const classes = {
     type:{
-        cancelled:"table-danger",
-        approved: "table-success",
-        waiting:  "table-warning"
+        NotIntrested:"table-danger",
+        Intrested: "table-success",
+        // waiting:  "table-warning"
     }
 }
 
 let types = {
-    approved : {
-        label:"Approved",
+    Intrested : {
+        label:"Intrested",
         isSelected:false
     },
-    waiting : {
-        label:"Wait",
-        isSelected:false
-    },
-    cancelled : {
-        label:"Cancel",
+    // waiting : {
+    //     label:"Wait",
+    //     isSelected:false
+    // },
+    NotIntrested : {
+        label:"Not Intrested",
         isSelected:false
     }
 };

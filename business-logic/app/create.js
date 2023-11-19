@@ -1,44 +1,52 @@
 const database = require("../../database");
 const { collections } = require("../../database");
+const utilities = require("../../utilities")
 
 const create = module.exports;
 
 //Create API to create a Request coming from the user
 create.logic = async (req) => {
 
-/*
-    Step-1: Get the user ID from the person who is using the application.
-    Tech World: Extracting the logged-in user information from the incoming request.
-*/
+    /*
+        Step-1: Get the user ID from the person who is using the application.
+        Tech World: Extracting the logged-in user information from the incoming request.
+    */
     const { userId } = req.user;
 
-/* 
-    Step-2: Taking details like category, requirement, time, and fare from the user's request
-    Tech World: Extracting the variable's data from the incoming request body 
-*/
-    const { category, requirement, time, fare } = req.body;
+    /* 
+        Step-2: Taking details like category, requirement, time, and fare from the user's request
+        Tech World: Extracting the variable's data from the incoming request body 
+    */
+    const { movieName, category, showTime, duration, fare } = req.body;
 
-/*
-    Step-3: Making a package with the user's ID, current time, and an initial 'approved' status.
-    Tech World: Creating a payload object to store information for database insertion. 
-*/
+    /* 
+        Step-4: Making a note of the current time.
+        Tech World: Generating a timestamp using utility function for future reference.
+   */
+    const timestamp = utilities.getISOTimestamp();
 
-    const payload = {
+    /*
+        Step-3: Making a package with the user's ID, current time, and an initial 'approved' status.
+        Tech World: Creating a payload object to store information for database insertion. 
+    */
+
+    const movie = {
         uid: userId,
-        createdAt: new Date().toISOString(),
-        status: 'waiting',
+        movieName: movieName,
         category: category,
-        time: time,
+        showTime: showTime,
+        duration: duration,
         fare: fare,
-        requirement: requirement
+        createdAt: timestamp,
+        updatedAt: timestamp
     };
 
-/* 
-    Step-5: Putting the package into a special storage (database) so that we can remember it later.
-    Tech World: Using MongoDB to insert the payload (package of information) into a collection named 'REQUESTS.'
-    Additional Info 1: Here 'database.client.collection' refers to a MongoDB collection and 'collections.REQUESTS' holds the collection name
-    Additional Info 2: The 'insertOne' method is used to add a single document to the MongoDB collection 
-*/
+    /* 
+    Step 5: Saving the movie details.
+    Tech World: Using MongoDB to insert the payload (movie information) into a collection named 'MOVIES.'
+    Additional Info 1: 'database.client.collection' refers to a MongoDB collection and 'collections.MOVIES' holds the collection name
+    Additional Info 2: The 'insertOne' method is used to add a single document to the MongoDB collection.
+    */
 
-    return await database.client.collection(collections.REQUESTS).insertOne(payload);
+    return await database.client.collection(collections.MOVIES).insertOne(movie);
 };
