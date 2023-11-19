@@ -4,6 +4,7 @@ const { ObjectId } = require("mongodb");
 const utilities = require("../utilities")
 
 const request = module.exports;
+const validStatus = ['approved', 'waiting', 'cancelled'];
 
 request.create = async (req) => {
     const { userId } = req.user;
@@ -12,7 +13,7 @@ request.create = async (req) => {
     const payload = {
         uid: userId,
         createdAt: new Date().toISOString(),
-        status: 'approved',
+        status: 'waiting',
         category: category,
         time: time,
         fare: fare,
@@ -49,7 +50,6 @@ request.update = async (req) => {
     const { status } = req.body;
     const id = req.params.id;
 
-    const validStatus = ['approved', 'waiting', 'cancelled'];
     const searchKeys = { uid:userId };
     const payload = {}
     if (!validStatus.includes(status)) throw new Error("Invalid status supplied!");

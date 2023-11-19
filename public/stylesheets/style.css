@@ -122,3 +122,16 @@ box-shadow: 0 .5rem 1rem rgba(0,0,0,.25);
 table td, .table th {
   width: 10px
 }
+
+.user-persona-card {
+  border-radius: 30% !important;
+  padding: 70px;
+  color: #0029ff;
+  box-shadow: 0 0.2rem 0.75rem rgba(0,0,0,.2);
+  width: 250px;
+}
+
+.user-persona-card-text {
+  font-size: x-large;
+  font-weight: 600;
+}

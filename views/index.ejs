@@ -1,19 +1,24 @@
 <%- include("header") -%>
 
-<div class="row">
+  <div class="d-flex justify-content-center pt-5 row">
+    <a href="/app/user" class="cursor-pointer m-5">
+      <div class="cursor-pointer d-flex jumbotron justify-content-center user-persona-card">
+        <i class="fa fa-users" aria-hidden="true" style="font-size: 100px;"></i>
+      </div>
+      <div class="d-flex justify-content-center mt-4 user-persona-card-text">
+        Place Orders
+      </div>
+    </a>
 
-  <a href="/app/request"
-    class="border-bottom border-left border-right product-card cursor-pointer product-card-top-border">
-    <div class="product-card-heading">Request Form</div>
-    <p>You may request your order through this form. Enter details to request your order.</p>
-  </a>
+    <a href="/app/delivery" class="cursor-pointer m-5">
+      <div class="cursor-pointer d-flex jumbotron justify-content-center user-persona-card">
+        <i class="fa fa-user" aria-hidden="true" style="font-size: 100px;"></i>
+      </div>
+      <div class="d-flex justify-content-center mt-4 user-persona-card-text">
+        Deliver Order
+      </div>
+    </a>
 
-  <a href="/app/user/dashboard"
-    class="border-bottom border-left border-right product-card cursor-pointer product-card-top-border">
-    <div class="product-card-heading">User Dashboard</div>
-    <p>You can access all your orders through this dashboard.</p>
-  </a>
-  
-</div>
+  </div>
 
-<%- include("footer") -%>
+  <%- include("footer") -%>
