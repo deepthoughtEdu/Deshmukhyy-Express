@@ -16,12 +16,12 @@ pagesController.request = async (req, res) => {
     res.render('app/user/request', { title: 'Request' });
 }
 
-pagesController.delivery = async (req, res) => {
-    res.render('app/delivery', { title: 'Delivery' });
+pagesController.reader = async (req, res) => {
+    res.render('app/reader', { title: 'Reader' });
 }
 
-pagesController.deliverydashboard = async (req, res) => {
-    res.render('app/delivery/dashboard', { title: 'Dashboard' });
+pagesController.readerdashboard = async (req, res) => {
+    res.render('app/reader/dashboard', { title: 'Dashboard' });
 }
 
 
