@@ -13,7 +13,7 @@ function initialize() {
         })
 
         $.ajax({
-            url: '/api/request',
+            url: '/api/app',
             method: 'post',
             cache: false,
             contentType: 'application/json; charset=utf-8',

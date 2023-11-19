@@ -66,7 +66,7 @@ function initialize() {
         })
     }
     
-    orderDetailsTable.render(`/api/request`);
+    orderDetailsTable.render(`/api/app`);
     $('#order-details').on('change','select.status',function(){
         let value = $(this).val();
         let _classes = Object.keys(classes.type).map(e => classes.type[e]).join(' ');
@@ -82,7 +82,7 @@ function initialize() {
         }
 
         $.ajax({
-            url: `/api/request/${id}`,
+            url: `/api/app/${id}`,
             method: 'put',
             cache: false,
             contentType: 'application/json; charset=utf-8',
