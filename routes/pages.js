@@ -9,7 +9,6 @@ helpers.setupPageRoute(router, '/', [middlewares.user.requireLogin], controllers
 helpers.setupPageRoute(router, '/login', [], controllers.pages.login)
 
 helpers.setupPageRoute(router, '/app/user', [middlewares.user.requireLogin], controllers.pages.user)
-helpers.setupPageRoute(router, '/app/user/dashboard', [middlewares.user.requireLogin], controllers.pages.userdashboard)
 
 helpers.setupPageRoute(router, '/app/organizer', [middlewares.user.requireLogin], controllers.pages.organizer)
 helpers.setupPageRoute(router, '/app/organizer/create', [middlewares.user.requireLogin], controllers.pages.create)

@@ -12,10 +12,6 @@ pagesController.user = async (req, res) => {
     res.render('app/user/index', { title: 'User' });
 }
 
-pagesController.userdashboard = async (req, res) => {
-    res.render('app/user/dashboard', { title: 'Dashboard' });
-}
-
 pagesController.organizer = async (req, res) => {
     res.render('app/organizer/index', { title: 'Organizer' });
 }
