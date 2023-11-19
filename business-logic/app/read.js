@@ -12,8 +12,8 @@ read.logic = async (req) => {
     const key = {}
 
     const [count, requests] = await Promise.all([
-        database.client.collection(collections.MOVIES).countDocuments(key),
-        database.client.collection(collections.MOVIES).find(key).skip(offset).limit(limit).toArray()
+        database.client.collection(_________________).countDocuments(key),
+        database.client.collection(_________________).find(key).skip(offset).limit(limit).toArray()
     ]);
 
     const collection = await Promise.all(requests.map(async item => {
@@ -23,5 +23,5 @@ read.logic = async (req) => {
         return item;
     }));
 
-    return utilities.paginate(`/api/app${req.url}`, collection, count, limit, page);
+    return utilities.paginate(`_____________${req.url}`, ______________, count, limit, page);
 };

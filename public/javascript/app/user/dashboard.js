@@ -32,22 +32,21 @@ function getSelect(selected){
 
 function initialize() {
     let orderDetailsTable = new Table({
-        target:'#show-details',
+        target:'#_____________',
         columns:[
-            {title:"S.No"},
-            {title:"Movie"},
-            {title:"Category"},
-            {title:"Time"},
-            {title:"Duration"},
-            {title:"Fare"},
-            {title:"Organizer"},
-            {title:"Status"},
+            {title:"__________"}, // S No
+            {title:"__________"}, // Movie
+            {title:"__________"}, //Category
+            {title:"__________"}, //Time
+            {title:"__________"}, //Duration
+            {title:"__________"}, //Fare
+            {title:"__________"}, //Organizer
+            {title:"__________"}, //Status
         ],
         formatter: formatTableResponse
     })
 
     function formatTableResponse(data, from=0){
-        console.log(data);
         return data.map(function(row,index){
             return {
                 attributes: {
@@ -56,11 +55,11 @@ function initialize() {
                 classes: classes.type[row.status],
                 data: {
                     Sno:`${(from + (index + 1))}`,
-                    ordername: row.moviename,
+                    ordername: ____________,
                     category: row.category.charAt(0).toUpperCase() + row.category.slice(1),
-                    time: row.time,
-                    duration: row.duration + ' hour',
-                    fare: row.fare,
+                    time: ___________,
+                    duration: ____________ + ' hour',
+                    fare: ____________,
                     organizedby: row.user.username,
                     status: getSelect(row.status || 'waiting'),
                     
@@ -69,7 +68,7 @@ function initialize() {
         })
     }
     
-    orderDetailsTable.render(`/api/app`);
+    orderDetailsTable.render(`______________`);
 
     $('#show-details').on('change','select.status',function(){
         let value = $(this).val();
