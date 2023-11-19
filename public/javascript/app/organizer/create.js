@@ -2,7 +2,7 @@ $(window).on('load', initialize);
 
 function initialize() {
 
-    $('#create-show-form').on('submit', function (e) {
+    $('#________________').on('submit', function (e) {
         e.preventDefault();
 
         const formData = {};
@@ -13,8 +13,8 @@ function initialize() {
         })
 
         $.ajax({
-            url: '/api/app',
-            method: 'post',
+            url: '________________',
+            method: '____________',
             cache: false,
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',

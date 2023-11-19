@@ -8,9 +8,9 @@
         <form class="col-12 col-md-6 justify-content-center form-container" id="create-show-form">
             <div class="mb-3 question">
                 <label for="category" class="form-label">
-                    What is the category of the show?
+                    ___________________________________
                 </label>
-                <select class="custom-select" name="category">
+                <select class="custom-select" name="____________"> <!-- data value: category-->
                     <option selected>Open this select menu</option>
                     <option value="movies">Movies</option>
                     <option value="tv-show">TV Shows</option>
@@ -19,22 +19,22 @@
             </div>
             <div class="mb-3 question">
                 <label for="moviename" class="form-label">
-                    What is the name of the TV Shows/Movies/WebSeries?
+                    _____________________________________
                 </label>
-                <input type="text" name="moviename" class="form-control" placeholder="Movie Name">
+                <input type="text" name="______________" class="form-control" placeholder="Movie Name"> <!-- data value: moviename-->
             </div>
 
             <div class="mb-3 question">
                 <label for="duration" class="form-label">
-                    What is the duration in hours?
+                  ______________________________________
                 </label>
-                <input type="number" name="duration" class="form-control" placeholder="Duration">
+                <input type="number" name="____________" class="form-control" placeholder="Duration"> <!-- data value: duration-->
             </div>
             <div class="mb-3 question">
                 <label for="time" class="form-label">
-                    What is the time for your show?
+                    _____________________________________
                 </label>
-                <select class="custom-select" name="time">
+                <select class="custom-select" name="_____________"> <!-- data value: time-->
                     <option selected>Open this select menu</option>
                     <% for (var i=7; i<11; i++) { %>
                         <option value="<%= [i+1] %>:00am">
@@ -50,13 +50,13 @@
             </div>
             <div class="mb-3 question">
                 <label for="fare" class="form-label">
-                    Please enter fare (in rupees) for the above choice
+                    _________________________________________________
                 </label>
-                <input type="number" name="fare" class="form-control" placeholder="Enter Amount">
+                <input type="number" name="_______________" class="form-control" placeholder="Enter Amount"> <!-- data value: fare-->
             </div>
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary">
-                    Submit
+                    ______________
                 </button>
             </div>
         </form>
