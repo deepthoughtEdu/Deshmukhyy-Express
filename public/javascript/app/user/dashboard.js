@@ -71,7 +71,7 @@ function initialize() {
     
     orderDetailsTable.render(`/api/app`);
 
-    $('#show-details').on('change','select.status',function(){
+    $('#_______________').on('change','select.status',function(){
         let value = $(this).val();
         let _classes = Object.keys(classes.type).map(e => classes.type[e]).join(' ');
         let _class = classes.type[value] || "";
@@ -86,8 +86,8 @@ function initialize() {
         }
 
         $.ajax({
-            url: `/api/app/${id}`,
-            method: 'put',
+            url: `______________/${id}`,
+            method: '___________',
             cache: false,
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',

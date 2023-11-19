@@ -4,11 +4,11 @@ const { ObjectId } = require("mongodb");
 const utilities = require("../../utilities")
 
 const update = module.exports;
-const validStatus = ['interested', 'waiting', 'notInterested'];
+const validStatus = ['_____________', '_____________', '______________']; //interested, waiting, notInterested
 
 update.logic = async (req) => {
-    const { userId } = req.user;
-    const { status } = req.body;
+    const { userId } = _____________;
+    const { status } = _____________;
     const id = req.params.id;
 
     const searchKeys = { uid:userId };
@@ -17,9 +17,8 @@ update.logic = async (req) => {
     if (!ObjectId.isValid(id)) throw new Error("Invalid request ID!")
     
     searchKeys._id = new ObjectId(id);
-    console.log(searchKeys)
-    payload.status = status;
+    payload.status = _____________;
     payload.updatedAt = utilities.getISOTimestamp();
 
-    await database.client.collection(collections.MOVIES).findOneAndUpdate(searchKeys, { $set: payload });
+    await database.client.collection(__________________).findOneAndUpdate(searchKeys, { $set: _____________ });
 };
