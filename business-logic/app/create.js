@@ -11,13 +11,13 @@ create.logic = async (req) => {
         Step-1: Get the user ID from the person who is using the application.
         Tech World: Extracting the logged-in user information from the incoming request.
     */
-    const { userId } = _____________;
+    const { userId } = req.user;
 
     /* 
         Step-2: Taking details like category, requirement, time, and fare from the user's request
         Tech World: Extracting the variable's data from the incoming request body 
     */
-    const { category, movieName, showTime, duration, fare } = _____________;
+    const { category, movieName, showTime, duration, fare } = req.body;
 
     /* 
         Step-3: Making a note of the current time.
@@ -31,24 +31,22 @@ create.logic = async (req) => {
     */
 
     const movie = {
-        uid: _________,
-        movieName: __________,
-        category: ___________,
-        showTime: _________,
-        duration: __________,
-        fare: _________,
-        createdAt: __________,
-        updatedAt: __________
+        uid: userId,
+        movieName: movieName,
+        category: category,
+        showTime: showTime,
+        duration: duration,
+        fare: fare,
+        createdAt: timestamp,
+        updatedAt: timestamp
     };
 
     /* 
-    Step 6: Saving the movie details.
+    Step 5: Saving the movie details.
     Tech World: Using MongoDB to insert the payload (movie information) into a collection named 'MOVIES.'
     Additional Info 1: 'database.client.collection' refers to a MongoDB collection and 'collections.MOVIES' holds the collection name
     Additional Info 2: The 'insertOne' method is used to add a single document to the MongoDB collection.
     */
 
-    return await database.client.collection(_______________).insertOne(____________);
+    return await database.client.collection(collections.MOVIES).insertOne(movie);
 };
-
-
