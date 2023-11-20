@@ -125,7 +125,7 @@ table td, .table th {
 
 .user-persona-card {
   border-radius: 30% !important;
-  padding: 70px;
+  padding: 50px !important;
   color: #0029ff;
   box-shadow: 0 0.2rem 0.75rem rgba(0,0,0,.2);
   width: 250px;

@@ -16,6 +16,10 @@ pagesController.request = async (req, res) => {
     res.render('app/user/request', { title: 'Request' });
 }
 
+pagesController.userdashboard = async (req, res) => {
+    res.render('app/user/dashboard', { title: 'User Dashboard' });
+}
+
 pagesController.delivery = async (req, res) => {
     res.render('app/delivery', { title: 'Delivery' });
 }
