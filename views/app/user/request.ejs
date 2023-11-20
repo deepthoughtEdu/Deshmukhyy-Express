@@ -41,7 +41,7 @@
                     Choose the Notes/quizes/assignment/record
                 </label>
                 <select class="custom-select" name="time">
-                    <option selected>Open this select menu</option>
+                    <!--<option selected>Open this select menu</option>
                     <% for (var i=7; i<11; i++) { %>
                         <option value="<%= [i+1] %>:00am">
                             <%= [i+1] %>:00am
@@ -51,8 +51,14 @@
                                 <option value="<%= [i+1] %>:00pm">
                                     <%= [i+1] %>:00pm
                                 </option>
-                                <% } %>
-                </select>
+                                <% } %>-->
+                 <option selected>Open this select name</option>
+                    <option value="Notes">Notes</option>
+                    <option value="Assingment">Assingment</option>
+                    <option value="ClassNotes">Class Notes</option>
+                    <option value="Record">Record</option>
+                    <option value="Observations">Observations</option>
+                     </select>
             </div>
             <div class="mb-3 question">
                 <label for="fare" class="form-label">
