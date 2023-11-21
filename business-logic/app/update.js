@@ -4,7 +4,7 @@ const { ObjectId } = require("mongodb");
 const utilities = require("../../utilities")
 
 const update = module.exports;
-const validStatus = ['approved', 'waiting', 'cancelled'];
+const validStatus = ['approved', 'pending', 'cancelled'];
 
 update.logic = async (req) => {
     const { userId } = req.user;
@@ -17,7 +17,6 @@ update.logic = async (req) => {
     if (!ObjectId.isValid(id)) throw new Error("Invalid request ID!")
     
     searchKeys._id = new ObjectId(id);
-    console.log(searchKeys)
     payload.status = status;
     payload.updatedAt = utilities.getISOTimestamp();
 

@@ -74,7 +74,7 @@ function renderNewRequestsTable () {
         })
     }
     
-    orderDetailsTable.render(`/api/request?role=delivery-partner&status=pending`);
+    orderDetailsTable.render(`/api/app?role=delivery-partner&status=pending`);
 }
 
 function renderAcceptedRequestsTable () {
@@ -111,5 +111,5 @@ function renderAcceptedRequestsTable () {
             }
         })
     }
-    orderDetailsTable.render(`/api/request?role=delivery-partner&status=approved&acceptedBy=${loggedInUser.userId}`);
+    orderDetailsTable.render(`/api/app?role=delivery-partner&status=approved&acceptedBy=${loggedInUser.userId}`);
 }

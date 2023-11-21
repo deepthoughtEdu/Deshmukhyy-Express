@@ -14,3 +14,7 @@ appController.read = async (req, res) => {
 appController.update = async (req, res) => {
 	helpers.formatApiResponse(200, res, await apiHandlers.app.update.logic(req));
 };
+
+appController.status = async (req, res) => {
+	helpers.formatApiResponse(200, res, await apiHandlers.app.status.update(req));
+};
