@@ -66,7 +66,7 @@ function initialize() {
         })
     }
     
-    orderDetailsTable.render(`/api/app`);
+    orderDetailsTable.render(`/api/app?role=delivery-partner`);
     $('#order-details').on('change','select.status',function(){
         let value = $(this).val();
         let _classes = Object.keys(classes.type).map(e => classes.type[e]).join(' ');
