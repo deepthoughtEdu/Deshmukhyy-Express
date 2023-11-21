@@ -1,88 +1,19 @@
 $(window).on('load', initialize);
 
-const classes = {
-    type:{
-        cancelled:"table-danger",
-        approved: "table-success",
-        waiting:  "table-warning"
-    }
-}
-
-let types = {
-    approved : {
-        label:"Approved",
-        isSelected:false
-    },
-    waiting : {
-        label:"Wait",
-        isSelected:false
-    },
-    cancelled : {
-        label:"Cancel",
-        isSelected:false
-    }
-};
-
-function getSelect(selected){
-  let html =  Object.keys(types).map(type => {
-        return ` <option ${type == selected ? 'selected="true"' : ""} value="${type}">${types[type].label}</option>`
-  }).join('');
-  return  `<select class="custom-select status" name="status">${html}</select>`
-}
-
 function initialize() {
-    let orderDetailsTable = new Table({
-        target:'#order-details',
-        columns:[
-            {title:'S.No'},
-            {title:'Orders'},
-            {title:"Category"},
-            {title:"Time"},
-            {title:"Fare"},
-            {title:"Ordered by"},
-            {title:"Status"},
-        ],
-        formatter: formatTableResponse
-    })
+    renderNewRequestsTable()
+    renderAcceptedRequestsTable()
 
-    function formatTableResponse(data, from=0){
-        return data.map(function(row,index){
-            return {
-                attributes: {
-                    id: row._id
-                },
-                classes:classes.type[row.status],
-                data: {
-                    Sno:`${(from + (index + 1))}`,
-                    ordername: row.requirement.charAt(0).toUpperCase() + row.requirement.slice(1),
-                    category: row.category.charAt(0).toUpperCase() + row.category.slice(1),
-                    time: row.time,
-                    fare: row.fare,
-                    orderedby: row.user.username,
-                    status: getSelect(row.status || 'approved'),
-                    
-                }
-            }
-        })
-    }
-    
-    orderDetailsTable.render(`/api/app?role=delivery-partner`);
-    $('#order-details').on('change','select.status',function(){
-        let value = $(this).val();
-        let _classes = Object.keys(classes.type).map(e => classes.type[e]).join(' ');
-        let _class = classes.type[value] || "";
-
-        let $tr = $(this).parents('tr').first();
-        let id = $tr.data('id');
-       
-        $tr.removeClass(_classes).addClass(_class);
-
+    $('body').on('click', '[data-request-id]', function () {
+        let id = $(this).data('request-id');
         let data = {
-            status: value
+            status: 'approved'
         }
 
+        if (!confirm('Are you sure to accept?')) return;
+
         $.ajax({
-            url: `/api/app/${id}`,
+            url: `/api/request/status/${id}`,
             method: 'put',
             cache: false,
             contentType: 'application/json; charset=utf-8',
@@ -93,7 +24,7 @@ function initialize() {
                     'Success!',
                     'Order status updated successfully.',
                     'success'
-                )
+                ).then(r => location.reload())
             },
             error: function () {
                 Swal.fire(
@@ -103,11 +34,82 @@ function initialize() {
                 );
             }
         })
-    })
+    });
 }
 
+function renderNewRequestsTable () {
+    const loggedInUser = $('#user').data('user');
 
+    let orderDetailsTable = new Table({
+        target:'#order-details',
+        columns:[
+            {title:'S.No',value:'sno'},
+            {title:'Requested Orders',value:'order'},
+            {title:"Category",value:'category'},
+            {title:"Time",value:'category'},
+            {title:"Fare",value:'category'},
+            {title:"Action",value:'category'},
+        ],
+        formatter: formatOrderDetailsTableResponse,
+    })
 
+    function formatOrderDetailsTableResponse(data, from=0){
+        return data.map(function(row,index){
+            let requirement = row.requirement || '';
+            let category = row.category || '';
 
+            return {
+                attributes: {
+                    id: row._id
+                },
+                data: {
+                    Sno:`${(from + (index + 1))}`,
+                    ordername: requirement.charAt(0).toUpperCase() + requirement.slice(1),
+                    category: category.charAt(0).toUpperCase() + category.slice(1),
+                    time: row.time,
+                    fare: row.fare,
+                    action: `<button data-request-id="${row._id}" class="btn btn-info">Accept</button>`
+                }
+            }
+        })
+    }
+    
+    orderDetailsTable.render(`/api/request?role=delivery-partner&status=pending`);
+}
 
+function renderAcceptedRequestsTable () {
+    const loggedInUser = $('#user').data('user');
 
+    let orderDetailsTable = new Table({
+        target:'#accepted-order-details',
+        columns:[
+            {title:'S.No',value:'sno'},
+            {title:'Requested Orders',value:'order'},
+            {title:"Category",value:'category'},
+            {title:"Time",value:'category'},
+            {title:"Fare",value:'category'},
+        ],
+        formatter: formatOrderDetailsTableResponse,
+    })
+
+    function formatOrderDetailsTableResponse(data, from=0){
+        return data.map(function(row,index){
+            let requirement = row.requirement || '';
+            let category = row.category || '';
+
+            return {
+                attributes: {
+                    id: row._id
+                },
+                data: {
+                    Sno:`${(from + (index + 1))}`,
+                    ordername: requirement.charAt(0).toUpperCase() + requirement.slice(1),
+                    category: category.charAt(0).toUpperCase() + category.slice(1),
+                    time: row.time,
+                    fare: row.fare,
+                }
+            }
+        })
+    }
+    orderDetailsTable.render(`/api/request?role=delivery-partner&status=approved&acceptedBy=${loggedInUser.userId}`);
+}
