@@ -13,7 +13,7 @@ function initialize() {
         if (!confirm('Are you sure to accept?')) return;
 
         $.ajax({
-            url: `/api/request/status/${id}`,
+            url: `/api/app/status/${id}`,
             method: 'put',
             cache: false,
             contentType: 'application/json; charset=utf-8',
