@@ -1,8 +1,9 @@
 $(window).on('load', initialize);
 
 function initialize() {
-    renderNewRequestsTable()
-    renderAcceptedRequestsTable()
+    renderNewRequestsTable();
+    renderAcceptedRequestsTable();
+    renderCompletedRequestsTable();
 
     $('body').on('click', '[data-request-id]', function () {
         let id = $(this).data('request-id');
@@ -112,4 +113,45 @@ function renderAcceptedRequestsTable () {
         })
     }
     orderDetailsTable.render(`/api/app?role=delivery-partner&status=approved&acceptedBy=${loggedInUser.userId}`);
+}
+
+function renderCompletedRequestsTable () {
+    const loggedInUser = $('#user').data('user');
+
+    let orderDetailsTable = new Table({
+        target:'#completed-order-details',
+        columns:[
+            {title:'S.No',value:'sno'},
+            {title:'Requested Orders',value:'order'},
+            {title:"Category",value:'category'},
+            {title:"Time",value:'category'},
+            {title:"Fare",value:'category'},
+            {title:"Status",value:'category'},
+            {title:"Rating",value:'category'},
+        ],
+        formatter: formatOrderDetailsTableResponse,
+    })
+
+    function formatOrderDetailsTableResponse(data, from=0){
+        return data.map(function(row,index){
+            let requirement = row.requirement || '';
+            let category = row.category || '';
+
+            return {
+                attributes: {
+                    id: row._id
+                },
+                data: {
+                    Sno:`${(from + (index + 1))}`,
+                    ordername: requirement.charAt(0).toUpperCase() + requirement.slice(1),
+                    category: category.charAt(0).toUpperCase() + category.slice(1),
+                    time: row.time,
+                    fare: row.fare,
+                    status: 'Completed',
+                    rating: row.rating + ' star',
+                }
+            }
+        })
+    }
+    orderDetailsTable.render(`/api/app?role=delivery-partner&status=completed&acceptedBy=${loggedInUser.userId}`);
 }

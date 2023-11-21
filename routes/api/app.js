@@ -8,5 +8,6 @@ setupApiRoute(router, 'post', '/', [middlewares.user.authenticateUser], controll
 setupApiRoute(router, 'get', '/', [middlewares.user.authenticateUser], controllers.api.app.read)
 setupApiRoute(router, 'put', '/:id', [middlewares.user.authenticateUser], controllers.api.app.update)
 setupApiRoute(router, 'put', '/status/:id', [middlewares.user.authenticateUser], controllers.api.app.status);
+setupApiRoute(router, 'put', '/rating/:id', [middlewares.user.authenticateUser], controllers.api.app.rate);
 
 module.exports = router;

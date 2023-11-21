@@ -45,6 +45,7 @@ function initialize() {
             {title:"Time",value:'category'},
             {title:"Fare",value:'category'},
             {title:"Status",value:'category'},
+            {title:"Rate delivery",value:'category'},
         ],
         formatter: formatOrderDetailsTableResponse,
     })
@@ -53,6 +54,7 @@ function initialize() {
         return data.map(function(row,index){
             let requirement = row.requirement || '';
             let category = row.category || '';
+            let {status, rating} = row;
 
             return {
                 attributes: {
@@ -66,12 +68,47 @@ function initialize() {
                     time: row.time,
                     fare: row.fare,
                     status: getSelect(row.status || 'pending'),
-                    
+                    rate: `<select ${(status == 'completed' || status == 'pending') ? 'disabled' : ''} id="previous-order-details" data-request-id="${row._id}" class="custom-select status">
+                                ${Array.from(new Array(5)).map((e, i) => `<option ${(i+1) == rating ? 'selected' : ''} value="${i + 1}">${i + 1} Star</option>`)}
+                            </select>`
                 }
             }
         })
     }
     
     orderDetailsTable.render(`/api/app?role=user`);
+
+    $('body').on('change', '#previous-order-details', function () {
+        let id = $(this).data('request-id');
+        let value = $(this).val();
+        let data = {
+            rating: value,
+        }
+
+        if (!confirm('Are you sure? This cannot be un-done.')) return;
+
+        $.ajax({
+            url: `/api/app/rating/${id}`,
+            method: 'put',
+            cache: false,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            success: function () {
+                Swal.fire(
+                    'Success!',
+                    'Rated successfully.',
+                    'success'
+                ).then(r => location.reload())
+            },
+            error: function () {
+                Swal.fire(
+                    'Error!',
+                    'Something went wrong.',
+                    'error'
+                );
+            }
+        })
+    });
 
 }
