@@ -25,7 +25,8 @@ pagesController.delivery = async (req, res) => {
 }
 
 pagesController.deliverydashboard = async (req, res) => {
-    res.render('app/delivery/dashboard', { title: 'Dashboard' });
+    const {user} = req;
+    res.render('app/delivery/dashboard', { title: 'Dashboard', user });
 }
 
 
