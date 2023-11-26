@@ -2,32 +2,42 @@ $(window).on('load', initialize);
 
 const classes = {
     type:{
-        completed:"table-success",
-        approved: "table-info",
-        pending:  "table-warning"
+        star1: "table-dark",
+        star2: "table-danger",
+        star3: "table-warning",
+        star4: "table-active",
+        star5: "table-success"
     }
 }
 
 const types = {
-    approved : {
-        label:"Approved",
+    star1 : {
+        label:"1 ⭐",
         isSelected:false
     },
-    pending : {
-        label:"Pending",
+    star2 : {
+        label:"2 ⭐⭐",
         isSelected:false
     },
-    completed : {
-        label:"Completed",
+    star3 : {
+        label:"3 ⭐⭐⭐",
         isSelected:false
-    }
+    },
+    star4 : {
+        label:"4 ⭐⭐⭐⭐",
+        isSelected:false
+    },
+    star5 : {
+        label:"5 ⭐⭐⭐⭐⭐",
+        isSelected:false
+    },
 };
 
-function getSelect(selected){
+function getSelect(selected, status, id){
   let html =  Object.keys(types).map(type => {
         return ` <option ${type == selected ? 'selected' : ""} value="${type}">${types[type].label}</option>`
   }).join('');
-  return  `<select disabled class="custom-select status" name="status">${html}</select>`
+  return  `<select ${(status == 'completed' || status == 'pending') ? 'disabled' : ''} id="previous-order-details" data-request-id="${id}" class="custom-select status" name="status">${html}</select>`
 }
 
 
@@ -52,10 +62,6 @@ function initialize() {
 
     function formatOrderDetailsTableResponse(data, from=0){
         return data.map(function(row,index){
-            let requirement = row.requirement || '';
-            let category = row.category || '';
-            let {status, rating} = row;
-
             return {
                 attributes: {
                     id: row._id
@@ -63,14 +69,12 @@ function initialize() {
                 classes:classes.type[row.status],
                 data: {
                     Sno:`${(from + (index + 1))}`,
-                    ordername: requirement.charAt(0).toUpperCase() + requirement.slice(1),
-                    category: category.charAt(0).toUpperCase() + category.slice(1),
+                    ordername: row.requirement.charAt(0).toUpperCase() +  row.requirement.slice(1) || '',
+                    category: row.category.charAt(0).toUpperCase() + row.category.slice(1) || '',
                     time: row.time,
                     fare: row.fare,
-                    status: getSelect(row.status || 'pending'),
-                    rate: `<select ${(status == 'completed' || status == 'pending') ? 'disabled' : ''} id="previous-order-details" data-request-id="${row._id}" class="custom-select status">
-                                ${Array.from(new Array(5)).map((e, i) => `<option ${(i+1) == rating ? 'selected' : ''} value="${i + 1}">${i + 1} Star</option>`)}
-                            </select>`
+                    status: row.status.charAt(0).toUpperCase() + row.status.slice(1) || '',
+                    rate: getSelect(row.rating, row.status, row._id || '--')
                 }
             }
         })
