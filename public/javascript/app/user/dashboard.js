@@ -37,14 +37,13 @@ function getSelect(selected, status, id){
   let html =  Object.keys(types).map(type => {
         return ` <option ${type == selected ? 'selected' : ""} value="${type}">${types[type].label}</option>`
   }).join('');
-  return  `<select ${(status == 'completed' || status == 'pending') ? 'disabled' : ''} id="previous-order-details" data-request-id="${id}" class="custom-select status" name="status">${html}</select>`
+  return  `<select ${(status == 'completed' || status == 'pending') ? 'disabled' : ''} id="previous-order-details" data-request-id="${id}" class="custom-select rating" name="rating">${html}</select>`
 }
-
 
 function initialize() {
 
     let orderDetailsTable = new Table({
-        target:'.my-requests-table',
+        target:'#order-details',
         params: {
             role: 'user'
         },
@@ -66,7 +65,7 @@ function initialize() {
                 attributes: {
                     id: row._id
                 },
-                classes:classes.type[row.status],
+                classes:classes.type[row.rating],
                 data: {
                     Sno:`${(from + (index + 1))}`,
                     ordername: row.requirement.charAt(0).toUpperCase() +  row.requirement.slice(1) || '',
@@ -82,9 +81,15 @@ function initialize() {
     
     orderDetailsTable.render(`/api/app?role=user`);
 
-    $('body').on('change', '#previous-order-details', function () {
+    $("#order-details").on('change', 'select.rating', function () {
         let id = $(this).data('request-id');
         let value = $(this).val();
+        let _classes = Object.keys(classes.type).map(e => classes.type[e]).join(' ');
+        let _class = classes.type[value] || "";
+
+        let $tr = $(this).parents('tr').first();
+        $tr.removeClass(_classes).addClass(_class);
+
         let data = {
             rating: value,
         }
