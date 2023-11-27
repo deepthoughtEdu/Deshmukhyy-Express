@@ -2,32 +2,32 @@ $(window).on('load', initialize);
 
 const classes = {
     type:{
-        star1: "table-dark",
-        star2: "table-danger",
-        star3: "table-warning",
-        star4: "table-active",
-        star5: "table-success"
+        1: "table-dark",
+        2: "table-danger",
+        3: "table-warning",
+        4: "table-active",
+        5: "table-success"
     }
 }
 
 const types = {
-    star1 : {
+    1 : {
         label:"1 ⭐",
         isSelected:false
     },
-    star2 : {
+    2 : {
         label:"2 ⭐⭐",
         isSelected:false
     },
-    star3 : {
+    3 : {
         label:"3 ⭐⭐⭐",
         isSelected:false
     },
-    star4 : {
+    4 : {
         label:"4 ⭐⭐⭐⭐",
         isSelected:false
     },
-    star5 : {
+    5 : {
         label:"5 ⭐⭐⭐⭐⭐",
         isSelected:false
     },
@@ -48,13 +48,14 @@ function initialize() {
             role: 'user'
         },
         columns:[
-            {title:'S.No',value:'sno'},
-            {title:'Requested Orders',value:'order'},
-            {title:"Category",value:'category'},
-            {title:"Time",value:'category'},
-            {title:"Fare",value:'category'},
-            {title:"Status",value:'category'},
-            {title:"Rate delivery",value:'category'},
+            {title:'S.No'},
+            {title:'Requested Orders'},
+            {title:"Category"},
+            {title:"Time"},
+            {title:"Fare"},
+            {title:"Accepted By"},
+            {title:"Status"},
+            {title:"Rating"},
         ],
         formatter: formatOrderDetailsTableResponse,
     })
@@ -72,6 +73,7 @@ function initialize() {
                     category: row.category.charAt(0).toUpperCase() + row.category.slice(1) || '',
                     time: row.time,
                     fare: row.fare,
+                    acceptedBy: row.acceptedByUser.username || '--',
                     status: row.status.charAt(0).toUpperCase() + row.status.slice(1) || '',
                     rate: getSelect(row.rating, row.status, row._id || '--')
                 }
