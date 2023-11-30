@@ -73,7 +73,7 @@ function initialize() {
                     category: row.category.charAt(0).toUpperCase() + row.category.slice(1) || '',
                     time: row.time,
                     fare: row.fare,
-                    acceptedBy: row.acceptedByUser.username || '--',
+                    acceptedBy: `${row.acceptedByUser.username?row.acceptedByUser.username:'Not accepted yet'}`,
                     status: row.status.charAt(0).toUpperCase() + row.status.slice(1) || '',
                     rate: getSelect(row.rating, row.status, row._id || '--')
                 }
