@@ -16,7 +16,7 @@ create.logic = async (req) => {
     Step-2: Taking details like category, requirement, time, and fare from the user's request
     Tech World: Extracting the variable's data from the incoming request body 
 */
-    const { category, requirement, time, fare } = req.body;
+    const { category, name, duration, fare } = req.body;
 
 /*
     Step-3: Making a package with the user's ID, current time, and an initial 'approved' status.
@@ -28,9 +28,9 @@ create.logic = async (req) => {
         createdAt: new Date().toISOString(),
         status: 'pending',
         category: category,
-        time: time,
+        duration: duration,
         fare: fare,
-        requirement: requirement
+        name: name
     };
 
 /* 

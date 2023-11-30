@@ -8,17 +8,25 @@
         <form class="col-12 col-md-6 justify-content-center form-container" id="request-form">
             <div class="mb-3 question">
                 <label for="category" class="form-label">
-                    Do you want to choose an item or a drop location? <!-- name and value-->
+                 what category do you like choose. <!-- name and value-->
                 </label>
                 <select class="custom-select" name="category"> <!-- name and value-->
                     <option selected>Open this select menu</option>
-                    <option value="delivery">Item Delivery</option>
-                    <option value="drop">Bike or Taxi</option>
+                    <option value="Movies">Movies</option>
+                    <option value="web series">web series</option>
+                    <option value="shows">shows</option>
                 </select>
             </div>
             <div class="mb-3 question">
+                <label for="fare" class="form-label">
+                    name of the movie, web series or shows
+                </label>
+                <input type="text" name="name" class="form-control" placeholder="name">
+            </div>
+  <!-- </div>
+            <div class="mb-3 question">
                 <label for="requirement" class="form-label">
-                    Choose item needed or drop location
+                    Choose movie,web series,shows.
                 </label>
                 <select class="custom-select" name="requirement">
                     <option selected>Open this select menu</option>
@@ -33,25 +41,21 @@
                     <option value="cake">Cake</option>
                     <option value="fullmeals">Full meals</option>
                     <option value="bananas">Bananas</option>
-                    <option value="apples">Apples</option>
-                </select>
-            </div>
+                    <option value="apples">Apples</option> -->
+                <!-- </select>
+            </div> -->
             <div class="mb-3 question">
                 <label for="time" class="form-label">
-                    Choose the time for drop or recieve item
+                    duration of the movie, web series or shows?
                 </label>
                 <select class="custom-select" name="time">
                     <option selected>Open this select menu</option>
-                    <% for (var i=7; i<11; i++) { %>
-                        <option value="<%= [i+1] %>:00am">
-                            <%= [i+1] %>:00am
+                    <% for (var i=15; i<210; i++) { %>
+                        <option value="<%= [i+15] %>:00min">
+                            <%= [i+15] %>:00min
                         </option>
                         <% } %>
-                            <% for (var i=1; i<12; i++) { %>
-                                <option value="<%= [i+1] %>:00pm">
-                                    <%= [i+1] %>:00pm
-                                </option>
-                                <% } %>
+                            
                 </select>
             </div>
             <div class="mb-3 question">
