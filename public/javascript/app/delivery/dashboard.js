@@ -78,7 +78,7 @@ function renderNewRequestsTable () {
         }
         
         orderDetailsTable.render(`/api/app?role=delivery-partner&status=pending`);
-    }
+}
 
 function renderAcceptedRequestsTable () {
     const loggedInUser = $('#user').data('user');
