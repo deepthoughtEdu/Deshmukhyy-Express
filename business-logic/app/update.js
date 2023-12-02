@@ -4,7 +4,7 @@ const { ObjectId } = require("mongodb");
 const utilities = require("../../utilities")
 
 const update = module.exports;
-const validStatus = ['approved', 'waiting', 'cancelled'];
+const validStatus = ['approved', 'pending', 'cancelled'];
 
 update.logic = async (req) => {
     const { userId } = req.user;

@@ -59,6 +59,8 @@ read.logic = async (req) => {
         if (acceptedBy) {
             const acceptedByUser = await database.client.collection(collections.USERS).findOne({userId: acceptedBy});
             item.acceptedByUser = utilities.filterObjectByKeys(acceptedByUser, userfields);
+        } else {
+            item.acceptedByUser = {}
         }
         item.user = utilities.filterObjectByKeys(user, userfields);
         return item;

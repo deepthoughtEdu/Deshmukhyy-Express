@@ -25,7 +25,7 @@ let types = {
 
 function getSelect(selected){
   let html =  Object.keys(types).map(type => {
-        return ` <option ${type == selected ? 'selected="true"' : ""} value="${type}">${types[type].label}</option>`
+        return `<option ${type == selected ? 'selected="true"' : ""} value="${type}">${types[type].label}</option>`
   }).join('');
   return  `<select class="custom-select status" name="status">${html}</select>`
 }
@@ -99,7 +99,7 @@ function renderNewRequestsTable () {
                     category: category.charAt(0).toUpperCase() + category.slice(1),
                     time: row.time,
                     fare: row.fare,
-                    action: getSelect(row.status || 'approved')
+                    action: getSelect(row.status || 'pending')
                 }
             }
         })
