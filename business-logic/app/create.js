@@ -30,10 +30,10 @@ create.logic = async (req) => {
         Tech World: Creating a payload object to store information for database insertion. 
     */
 
-    const movie = {
+    const notes = {
         uid: userId,
-        moviename: moviename,
-        category: category,
+        subject: subject,
+        topic: topic,
         time: time,
         duration: duration,
         fare: fare,
