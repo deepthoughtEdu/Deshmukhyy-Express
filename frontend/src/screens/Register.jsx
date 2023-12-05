@@ -31,7 +31,7 @@ export default function Authentication() {
 
   return (
     <div className="form">
-      <form className="form-horizontal signup">
+      <form className="form-horizontal auth-screen signup">
         <div className="form-wrap" style={{ position: "relative" }}>
           <h2>Sign Up</h2>
 

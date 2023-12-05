@@ -135,3 +135,7 @@ table td, .table th {
   font-size: x-large;
   font-weight: 600;
 }
+
+.flickity-slider .card:not(.is-selected) {
+  opacity: 0.5;
+}

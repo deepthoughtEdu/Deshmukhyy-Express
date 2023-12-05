@@ -68,7 +68,7 @@ input {
     float: left;
     width: 40%;
 }
-button {
+.auth-screen button {
     padding: 8px 12px;
     margin: 4px 0;
     font-family: 'Montserrat', sans-serif;
@@ -78,7 +78,7 @@ button {
     cursor: pointer;
     transition: all .3s;
 }
-button:hover {
+.auth-screen button:hover {
     background: #140363;
     color: #fff;
     border-color: #646171;
