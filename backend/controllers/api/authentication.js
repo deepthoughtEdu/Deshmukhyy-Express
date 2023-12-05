@@ -26,6 +26,6 @@ authenticationController.signInUser = async (req, res, next) => {
 authenticationController.signOutUser = async function (req, res, next) {
 	req.logOut((err) => {
 		res.clearCookie('connect.sid');
-		res.redirect('/');
+		res.send('Ok');
 	});
 }

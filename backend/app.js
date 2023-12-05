@@ -28,9 +28,9 @@ async function initialize() {
       saveUninitialized: true,
     }
 
-    if (config.env === 'production') {
-      sessionOptions.cookie.secure = true // serve secure cookies
-    }
+    // if (config.env === 'production') {
+    //   sessionOptions.cookie.secure = true // serve secure cookies
+    // }
     
     // view engine setup
     app.set('views', path.join(__dirname, 'views'));

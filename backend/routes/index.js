@@ -3,8 +3,11 @@ var router = express.Router();
 var helpers = require('../helpers');
 var apiRouter = require('./api');
 var pageRouter = require('./pages');
+var middlewares = require('../middlewares');
 
-router.use('/api', apiRouter);
+router.options('/api', middlewares.cors.cors);
+
+router.use('/api', middlewares.cors.corsWithOptions, apiRouter);
 router.use('/', pageRouter);
 
 /**

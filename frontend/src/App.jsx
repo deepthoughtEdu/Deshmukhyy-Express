@@ -1,19 +1,9 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from './screens/Home';
-import AboutUs from './screens/About';
-import Services from './screens/Services';
+import React from 'react';
+import Router from './Router';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/services" element={<Services />} />
-      </Routes>
-    </BrowserRouter>
-  )
+    return <Router/>
 }
 
 export default App;

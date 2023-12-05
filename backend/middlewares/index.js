@@ -3,6 +3,7 @@ const helpers = require('../helpers');
 const middlewares = module.exports;
 
 middlewares.user = require('./user');
+middlewares.cors  = require('./cors');
 
 middlewares.checkRequired = function (fields, req, res, next) {
     const {body} = req;

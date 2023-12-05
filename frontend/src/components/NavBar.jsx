@@ -1,26 +1,40 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
+import swal from "sweetalert";
+import { logoutUser } from "../utilities";
 
-export default function NavBar() {
+export default function NavBar(props) {
+    const navigate = useNavigate ();
+
+    const handleLogoout = async () => {
+        await logoutUser();
+        swal(
+            'Success!',
+            'Logged out successfully',
+            'success'
+        ).then(() => {
+            navigate(0);
+        });
+    }
+
     return (
-        <nav className="navbar navbar-default navbar-fixed-top">
-            <div className="container">
-                <div className="navbar-header">
-                    <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span className="icon-bar"></span>
-                        <span className="icon-bar"></span>
-                        <span className="icon-bar"></span>
-                    </button>
-                    <a className="navbar-brand" href="#myPage">DeshMukhyyExpress</a>
-                </div>
-                <div className="collapse navbar-collapse" id="myNavbar">
-                    <ul className="nav navbar-nav navbar-right">
-                        <li><Link to="/">HOME</Link></li>
-                        <li><Link to="/services">SERVICES</Link></li>
-                        <li><Link to="/about-us">ABOUT</Link></li>
-                    </ul>
-                </div>
+        <header className="page-header">
+        <div className="d-flex justify-content-between w-100 align-items-center">
+            <div className="d-flex">
+            <img
+                src="https://sdlms.deepthought.education/assets//uploads/files/images/dt_logo.png"
+                className="rounded-circle dt-logo"
+                alt="logo"
+            />
+            <div className="ml-2 my-auto">
+                <span className="header-text1 mr-1 text-uppercase">Deshmukhyy</span>
+                <span className="header-text2 text-uppercase">Express</span>
             </div>
-        </nav>
+            </div>
+        </div>
+        <button className="cursor-pointer btn bg-transparent border-0" onClick={handleLogoout}>
+            <i className="fa fa-sign-out logout-icon" aria-hidden="true"></i>
+        </button>
+        </header>
     );
 }
