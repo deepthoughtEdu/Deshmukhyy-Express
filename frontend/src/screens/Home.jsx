@@ -41,11 +41,13 @@ export default function Home (props) {
             <h3 className="mt-5 text-center">Orders and deliveries</h3>
           </div>
           <div className="row justify-content-center">
+
             <Flickity className="mt-4 w-75">
               {requests.map((item) => (
                 <Request data={item} key={item._id} />
               ))}
             </Flickity>
+
           </div>
         </div>
 
@@ -60,6 +62,7 @@ export default function Home (props) {
               >
 
               <FontAwesomeIcon icon={faPlus} />
+
             </Button>
           </div>
         </div>
@@ -74,9 +77,11 @@ export default function Home (props) {
           <Modal.Header closeButton>
             <Modal.Title>New Request</Modal.Title>
           </Modal.Header>
+
           <Modal.Body>
               <RequestStepper onSubmit={dataOnSubmit} />
           </Modal.Body>
+          
         </Modal>
 
         <Footer />
