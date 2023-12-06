@@ -1,7 +1,7 @@
 import React from "react";
 import Card from 'react-bootstrap/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBiking, faCar } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBiking } from '@fortawesome/free-solid-svg-icons';
 
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
