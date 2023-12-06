@@ -18,8 +18,21 @@ export default function Request({ data }) {
     }
   };
 
+  const getClassnameBasedOnVisibility = (isActive) => {
+    switch (isActive) {
+      case true:
+        return " activeItem";
+
+      case false:
+        return "";
+
+      default:
+        return "";
+    }
+  };
+
   return (
-    <div className="card mx-2" style={{ width: "25rem", minHeight: "13rem" }}>
+    <div className={"card mx-2 item" + getClassnameBasedOnVisibility(data.isActive)} style={{ width: "25rem", minHeight: "13rem" }}>
       <div className="card-header text-capitalize">{data.category}</div>
       <div className="card-body">
         <h5 className="card-title text-capitalize">{data.requirement}</h5>

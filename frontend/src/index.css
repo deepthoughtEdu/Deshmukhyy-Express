@@ -139,3 +139,9 @@ table td, .table th {
 .flickity-slider .card:not(.is-selected) {
   opacity: 0.5;
 }
+
+.activeItem {
+  transform: scale(1.3);
+  transition: all .6s ease-in-out;
+  z-index: 9999;
+}
