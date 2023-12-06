@@ -1,11 +1,15 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Home from './screens/Home';
 import AboutUs from './screens/About';
 import Services from './screens/Services';
 import Login from './screens/Login';
 import Register from './screens/Register';
+import User from './screens/User';
+import DeliveryPartner from './screens/DeliveryPartner';
+
 import { getLoggedInUser } from './utilities';
 import Loading from './components/Loader';
 
@@ -25,6 +29,8 @@ const PrivateRoutes = function (props) {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home {...props} />} />
+            <Route path="/user" element={<User {...props} />} />
+            <Route path="/delivery-partner" element={<DeliveryPartner {...props} />} />
             <Route path="/about-us" element={<AboutUs {...props}/>} />
             <Route path="/services" element={<Services {...props}/>} />
           </Routes>

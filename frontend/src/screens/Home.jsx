@@ -1,90 +1,48 @@
-import React, { useState } from "react";
-import Flickity from "react-flickity-component";
-import {Button, Modal} from 'react-bootstrap';
+import React from "react";
+import Card from 'react-bootstrap/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBiking, faCar } from '@fortawesome/free-solid-svg-icons';
 
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import Request from "../components/Request";
-import RequestStepper from "../components/RequestStepper";
+import { Link } from "react-router-dom";
 
-import data from '../data/requests.json';
-import "flickity/css/flickity.css";
-import { generateUUID } from "../utilities";
-
-export default function Home (props) {
-    /** State variables and their setter methods */
-    const [requests, setRequests] = useState(data);
-    const [open, setOpen] = useState(false);
-
-    /** Handles the modal show/hide state variables */
-    const handleClose = () => setOpen(false);
-    const handleShow = () => setOpen(true);
-
-    /** Function to handle the submit event */
-    const dataOnSubmit = (data) => {
-        data._id = generateUUID();
-        data.user = props.user;
-
-        setRequests((previousData) => ([data, ...previousData]));
-
-        setOpen(false);
-    }
-    
+export default function Home(props) {
     return (
-      <>
-        <NavBar />
+        <>
+            <NavBar />
+            <div className="container mt-5">
+                <div className="row justify-content-center pt-5">
 
-        <div className="container mt-5">
-          <div className="row mt-5 justify-content-center">
-            <h3 className="mt-5 text-center">Orders and deliveries</h3>
-          </div>
-          <div className="row justify-content-center">
+                  <div className="col-12 col-md-4 col-lg-3 mt-5">
+                    <Link to={'/user'} className="justify-content-center d-flex">
+                      <Card className="text-center bg-dark-subtle border shadow" style={{width: '15rem', borderRadius: '12px'}}>
+                        <Card.Title className="pt-4">
+                          User
+                        </Card.Title>
+                        <Card.Body className="pb-4">
+                          <FontAwesomeIcon size="4x" color="#0029ff" icon={faUser} />
+                        </Card.Body>
+                      </Card>
+                    </Link>
+                  </div>
 
-            <Flickity className="mt-4 w-75">
-              {requests.map((item) => (
-                <Request data={item} key={item._id} />
-              ))}
-            </Flickity>
+                  <div className="col-12 col-md-4 col-lg-3 mt-5">
+                    <Link to={'/delivery-partner'} className="justify-content-center d-flex">
+                      <Card className="text-center bg-dark-subtle border shadow" style={{width: '15rem', borderRadius: '12px'}}>
+                        <Card.Title className="pt-4">
+                          Delivery Partner
+                        </Card.Title>
+                        <Card.Body className="pb-4">
+                          <FontAwesomeIcon size="4x" color="#0029ff" icon={faBiking} />
+                        </Card.Body>
+                      </Card>
+                    </Link>
+                  </div>
 
-          </div>
-        </div>
-
-        <div className="container">
-          <div
-            className="position-absolute"
-            style={{ bottom: "60px", right: "60px" }}>
-
-            <Button
-              className="btn-dark create-btn-rounded"
-              onClick={handleShow}
-              >
-
-              <FontAwesomeIcon icon={faPlus} />
-
-            </Button>
-          </div>
-        </div>
-
-        <Modal
-          size="lg"
-          show={open}
-          onHide={handleClose}
-          backdrop="static"
-          keyboard={false}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>New Request</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-              <RequestStepper onSubmit={dataOnSubmit} />
-          </Modal.Body>
-          
-        </Modal>
-
-        <Footer />
-      </>
-    );
+                </div>
+            </div>
+            <Footer />
+        </>
+    )
 }
