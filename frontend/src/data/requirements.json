@@ -1,0 +1,15 @@
+[
+    { "value": "biryani", "label": "Biryani" },
+    { "value": "noodles", "label": "Noodles" },
+    { "value": "fried-rice", "label": "Fried-rice" },
+    { "value": "chapati+curry", "label": "Chapati + Curry" },
+    { "value": "bata-singaram", "label": "Bata Singaram" },
+    { "value": "abdullapurmet", "label": "Abdullapurmet" },
+    { "value": "lbnagar", "label": "L B Nagar" },
+    { "value": "pizza", "label": "Pizza" },
+    { "value": "cake", "label": "Cake" },
+    { "value": "fullmeals", "label": "Full meals" },
+    { "value": "bananas", "label": "Bananas" },
+    { "value": "apples", "label": "Apples" }
+  ]
+  

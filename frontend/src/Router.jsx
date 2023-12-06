@@ -20,13 +20,13 @@ const PublicRoutes = function () {
   )
 }
 
-const PrivateRoutes = function () {
+const PrivateRoutes = function (props) {
     return (
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/services" element={<Services />} />
+            <Route path="/" element={<Home {...props} />} />
+            <Route path="/about-us" element={<AboutUs {...props}/>} />
+            <Route path="/services" element={<Services {...props}/>} />
           </Routes>
         </BrowserRouter>
       )
@@ -35,12 +35,15 @@ const PrivateRoutes = function () {
 export default function Router() {
     const [isAuthenticated, setAuthenticate] = useState(false);
     const [isLoading, setLoading] = useState(true);
+    const [loggedInUser, setLoggedInUser] = useState({})
 
     useEffect(() => {
         async function validateAuth ()  {
             try {
-              if (await getLoggedInUser()) {
+              const user = await getLoggedInUser();
+              if (user) {
                 setAuthenticate(true);
+                setLoggedInUser(user);
               }
             } catch (e) {}
 
@@ -53,5 +56,5 @@ export default function Router() {
 
     if (isLoading) return <Loading />;
 
-    return isAuthenticated ? <PrivateRoutes /> : <PublicRoutes   />
+    return isAuthenticated ? <PrivateRoutes user={loggedInUser} /> : <PublicRoutes   />
 }

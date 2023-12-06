@@ -11,13 +11,26 @@ import RequestStepper from "../components/RequestStepper";
 
 import data from '../data/requests.json';
 import "flickity/css/flickity.css";
+import { generateUUID } from "../utilities";
 
-export default function Home () {
+export default function Home (props) {
+    /** State variables and their setter methods */
     const [requests, setRequests] = useState(data);
     const [open, setOpen] = useState(false);
 
+    /** Handles the modal show/hide state variables */
     const handleClose = () => setOpen(false);
     const handleShow = () => setOpen(true);
+
+    /** Function to handle the submit event */
+    const dataOnSubmit = (data) => {
+        data._id = generateUUID();
+        data.user = props.user;
+
+        setRequests((previousData) => ([data, ...previousData]));
+
+        setOpen(false);
+    }
     
     return (
       <>
@@ -68,15 +81,8 @@ export default function Home () {
             <Modal.Title>New Request</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-              <RequestStepper />
+              <RequestStepper onSubmit={dataOnSubmit} />
           </Modal.Body>
-
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary">Understood</Button>
-          </Modal.Footer>
         </Modal>
 
         <Footer />

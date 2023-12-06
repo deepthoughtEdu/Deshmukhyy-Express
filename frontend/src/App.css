@@ -6,6 +6,10 @@
     margin: 10px;
     cursor: pointer;
   }
+
+  .stepper-form {
+    min-height: 10rem;
+  }
   
 .stepper-form  label:before {
     background-color: white;
