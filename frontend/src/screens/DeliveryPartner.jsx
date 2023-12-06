@@ -7,7 +7,6 @@ import Footer from "../components/Footer";
 import { loadRequests } from "../utilities";
 
 export default function DeliveryPartner(props) {
-    const headers = ['Requirement', 'Category', 'Fare', 'Time', 'Action'];
     const [requests, setRequests] = useState([]);
 
     useEffect(() => {
@@ -24,7 +23,17 @@ export default function DeliveryPartner(props) {
         <NavBar />
         <div className="container mt-5 pt-4">
           <h4 className="mb-4 text-center">Pending requests</h4>
-          <Table>
+          <RequestTable requests={requests} />
+        </div>
+        <Footer />
+      </>
+    );
+}
+
+function RequestTable({requests}) {
+    const headers = ['Requirement', 'Category', 'Fare', 'Time', 'Action'];
+    return (
+        <Table>
             <thead>
               <tr>
                 <th>#</th>
@@ -39,15 +48,12 @@ export default function DeliveryPartner(props) {
                   <Row key={index} rowNumber={index + 1} data={request} />
                 ))}
             </tbody>
-          </Table>
-        </div>
-        <Footer />
-      </>
-    );
+        </Table>
+    )
 }
 
 function Row({data, rowNumber}) {
-    console.log(data)
+
     return (
         <tr>
             <td>{rowNumber}</td>
