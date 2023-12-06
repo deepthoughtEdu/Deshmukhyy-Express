@@ -21,6 +21,11 @@ export const registerUser = async (data) => {
     await axios.post(`${HOST}/api/auth/register`, data);
 }
 
+export const loadRequests = async () => {
+    const response = await axios.get(HOST + '/api/app/');
+    return response.data && response.data.response;
+}
+
 export const generateUUID = () => {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       const r = (Math.random() * 16) | 0;
