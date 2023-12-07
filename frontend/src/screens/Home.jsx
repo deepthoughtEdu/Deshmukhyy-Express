@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import OwlCarousel from 'react-owl-carousel';
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
+import Slider from "react-slick";
+// import OwlCarousel from 'react-owl-carousel';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -31,20 +32,27 @@ export default function Home() {
     };
     // This borked the transition animation, please fix it
 
+    const settings = {
+       
+        centerMode: true,
+  centerPadding: '60px',
+  slidesToShow: 3,
+      };
+
     return (
         <>
             <NavBar  />
             
-            <div className="container mt-5">
+            <div className=" mt-5">
                 <div className="row mt-5 justify-content-center">
                     <h3 className="mt-5">Orders and deliveries</h3>
                 </div>
-                <div className="row justify-content-center">
-                    <OwlCarousel className={'owl-theme mt-4 w-75 loadingClass'} margin={20} center nav navText={['Previous', 'Next']} onChanged={handleChanged} startPosition={activeIndex}>
+                
+                    <Slider {...settings}>
                         {items.map((item, index) => <Request data={item} key={index} />)}
-                    </OwlCarousel>
+                    </Slider>
+
                 </div>
-            </div>
 
             <Footer />
         </>
