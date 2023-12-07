@@ -1,0 +1,23 @@
+{
+  "name": "deshmukhyy-express",
+  "version": "1.0.0",
+  "description": "Base script for executing the full-stack application",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "set NODE_ENV=production && node start.js",
+    "dev": "set NODE_ENV=development && node start.js",
+    "install": "node install.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepthoughtEdu/Deshmukhyy-Express.git"
+  },
+  "author": "Shawan Mandal <hello@imshawan.dev>",
+  "email": "hello@imshawan.dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deepthoughtEdu/Deshmukhyy-Express/issues"
+  },
+  "homepage": "https://github.com/deepthoughtEdu/Deshmukhyy-Express#readme"
+}
