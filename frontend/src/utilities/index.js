@@ -21,9 +21,22 @@ export const registerUser = async (data) => {
     await axios.post(`${HOST}/api/auth/register`, data);
 }
 
-export const loadRequests = async () => {
-    const response = await axios.get(HOST + '/api/app/');
+export const loadRequests = async (status) => {
+    let url = HOST + '/api/app'; 
+    if (status) {
+        url += ('?status=' + status);
+    }
+    const response = await axios.get(url);
     return response.data && response.data.response;
+}
+
+export const createRequest = async (data) => {}
+
+export const updateRequestStatus = async (status, id) => {
+    if (!status || !id) {
+        throw new Error('Both status and id are required parameters.');
+    }
+    await axios.put(`${HOST}/api/app/${id}`, {status});
 }
 
 export const generateUUID = () => {

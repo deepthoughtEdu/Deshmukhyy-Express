@@ -4,12 +4,22 @@ const utilities = require("../../utilities")
 
 const read = module.exports;
 
+const validStatus = ['approved', 'pending', 'cancelled'];
+
 read.logic = async (req) => {
     
     const limit = parseInt(req.query.limit) || 5;
     const page = parseInt(req.query.page) || 0;
+    const status = req.query.status;
     const offset = page*limit;
-    const key = {}
+    const key = {};
+
+    if (status) {
+        if (!validStatus.includes(status)) {
+            throw new Error('Invalid status ' + status);
+        }
+        key.status = status;
+    }
 
     const [count, requests] = await Promise.all([
         database.client.collection(collections.REQUESTS).countDocuments(key),
@@ -19,7 +29,9 @@ read.logic = async (req) => {
     const collection = await Promise.all(requests.map(async item => {
         const {uid} = item;
         const user = await database.client.collection(collections.USERS).findOne({userId: uid});
-        item.user = utilities.filterObjectByKeys(user, ['username', 'email'])
+        
+        item.user = utilities.filterObjectByKeys(user, ['username', 'email']);
+
         return item;
     }));
 

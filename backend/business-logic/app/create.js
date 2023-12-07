@@ -26,7 +26,7 @@ create.logic = async (req) => {
     const payload = {
         uid: userId,
         createdAt: new Date().toISOString(),
-        status: 'waiting',
+        status: 'pending',
         category: category,
         time: time,
         fare: fare,

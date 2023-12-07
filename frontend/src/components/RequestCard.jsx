@@ -2,10 +2,10 @@ import React from "react";
 import moment from "moment";
 import Button from 'react-bootstrap/Button';
 
-export default function RequestCard({ data }) {
+export default function RequestCard({ data, onOrderAccept }) {
 
   return (
-    <div className="card m-2 p-0" id={data._id} style={{ width: "25rem", minHeight: "13rem" }}>
+    <div className="card m-2 p-0" style={{ width: "25rem", minHeight: "13rem" }}>
       <div className="card-header text-capitalize">{data.category}</div>
       <div className="card-body">
         <h5 className="card-title text-capitalize">{data.requirement}</h5>
@@ -14,7 +14,7 @@ export default function RequestCard({ data }) {
           Request time: {moment(data.createdAt).format("Do MMM, YYYY [at] h:mmA")}
         </p>
         
-        <Button>Accept</Button>
+        <Button id={data._id} onClick={onOrderAccept}>Accept</Button>
 
       </div>
     </div>

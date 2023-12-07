@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import { loadRequests } from "../utilities";
+import { loadRequests, updateRequestStatus } from "../utilities";
 import RequestCard from "../components/RequestCard";
 
 export default function DeliveryPartner(props) {
     const [requests, setRequests] = useState([]);
 
+    const onOrderAccept = async (event) => {
+        const id = event.target.id;
+        const status = 'approved';
+
+        await updateRequestStatus(status, id)
+    }
+
     useEffect(() => {
         async function load() {
-            const {data} = await loadRequests();
+            const {data} = await loadRequests('pending');
             setRequests(data);
         }
 
@@ -25,7 +32,7 @@ export default function DeliveryPartner(props) {
           <div className="row">
             {requests.map((item, index) => {
                 return (
-                  <RequestCard data={item} key={index} />
+                  <RequestCard onOrderAccept={onOrderAccept} data={item} key={index} />
                 )
             })}
           </div>

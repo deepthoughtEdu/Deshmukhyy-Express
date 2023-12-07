@@ -6,7 +6,7 @@ const utilities = require("../../utilities")
 
 
 const update = module.exports;
-const validStatus = ['approved', 'waiting', 'cancelled'];
+const validStatus = ['approved', 'pending', 'cancelled'];
 
 
 //This declares an function named logic within the update object. 
