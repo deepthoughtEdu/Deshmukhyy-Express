@@ -1,6 +1,7 @@
 const database = require("../../database");
 const { collections } = require("../../database");
-const utilities = require("../../utilities")
+const utilities = require("../../utilities");
+const {requirements} = require('./constants');
 
 const read = module.exports;
 
@@ -17,11 +18,19 @@ read.logic = async (req) => {
     ]);
 
     const collection = await Promise.all(requests.map(async item => {
-        const {uid} = item;
+        const {uid, requirement} = item;
         const user = await database.client.collection(collections.USERS).findOne({userId: uid});
+        
         item.user = utilities.filterObjectByKeys(user, ['username', 'email'])
+        item.image = getImageUrlFromRequirement(requirement)
+
         return item;
     }));
 
     return utilities.paginate(`/api/app${req.url}`, collection, count, limit, page);
 };
+
+function getImageUrlFromRequirement(requirement) {
+    let item = requirements.find(e => e.value == String(requirement).toLowerCase().split(' ').join(''));
+    return item && item.image;
+}
