@@ -4,7 +4,7 @@ const classes = {
     type:{
         cancelled:"table-danger",
         approved: "table-success",
-        waiting:  "table-warning"
+        pending:  "table-warning"
     }
 }
 
@@ -13,7 +13,7 @@ let types = {
         label:"Approved",
         isSelected:false
     },
-    waiting : {
+    pending : {
         label:"Wait",
         isSelected:false
     },
