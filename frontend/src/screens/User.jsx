@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Flickity from "react-flickity-component";
 import {Button, Modal} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +11,7 @@ import RequestStepper from "../components/RequestStepper";
 
 import data from '../data/requests.json';
 import "flickity/css/flickity.css";
-import { generateUUID } from "../utilities";
+import { createRequest, generateUUID, loadRequests } from "../utilities";
 
 export default function User (props) {
     /** State variables and their setter methods */
@@ -23,14 +23,22 @@ export default function User (props) {
     const handleShow = () => setOpen(true);
 
     /** Function to handle the submit event */
-    const dataOnSubmit = (data) => {
-        data._id = generateUUID();
+    const dataOnSubmit = async (data) => {
+        const request = await createRequest(data);
+
+        data._id = request.insertedId || generateUUID();
         data.user = props.user;
 
         setRequests((previousData) => ([data, ...previousData]));
 
         setOpen(false);
     }
+
+    /** This hook will run once the page loads */
+    useEffect(() => {
+        loadRequests()
+          .then((results) => setRequests(results.data));
+    }, [])
     
     return (
       <>
@@ -43,7 +51,7 @@ export default function User (props) {
           <div className="row justify-content-center">
 
             <Flickity className="mt-4 w-75">
-              {requests.map((item) => (
+              {requests && requests.map((item) => (
                 <Request data={item} key={item._id} />
               ))}
             </Flickity>

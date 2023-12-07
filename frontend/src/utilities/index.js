@@ -30,7 +30,10 @@ export const loadRequests = async (status) => {
     return response.data && response.data.response;
 }
 
-export const createRequest = async (data) => {}
+export const createRequest = async (data) => {
+    const response = await axios.post(HOST + '/api/app', data);
+    return response.data.response;
+}
 
 export const updateRequestStatus = async (status, id) => {
     if (!status || !id) {

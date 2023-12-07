@@ -11,7 +11,7 @@ export default function DeliveryPartner(props) {
         const id = event.target.id;
         const status = 'approved';
 
-        await updateRequestStatus(status, id)
+        await updateRequestStatus(status, id);
     }
 
     useEffect(() => {
