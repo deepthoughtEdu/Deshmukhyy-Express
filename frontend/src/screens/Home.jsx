@@ -8,9 +8,15 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Request from "../components/Request";
 import data from '../data/requests.json';
+import requirements from '../data/requirements.json';
 
 export default function Home() {
     const [items, setItems] = useState(data);
+
+    const getImageBasedOnRequirement = (requirement) => {
+        let item = requirements.find(e => e.value == String(requirement).toLowerCase().split(' ').join(''));
+        return item.image;
+    }
 
     const settings = {
         className:"center-slider",
@@ -22,7 +28,7 @@ export default function Home() {
         speed: 300,
         infinite: true,
         autoplaySpeed: 5000,
-        autoplay: true
+        // autoplay: true
       };
 
     return (
@@ -31,11 +37,11 @@ export default function Home() {
             
             <div className="px-4 mt-5">
                 <div className="row mt-5 justify-content-center">
-                    <h3 className="mt-5">Orders and deliveries</h3>
+                    <h3 className="">Orders and deliveries</h3>
                 </div>
                 
                 <Slider {...settings}>
-                    {items.map((item, index) => <Request data={item} key={index} />)}
+                    {items.map((item, index) => <Request data={item} image={getImageBasedOnRequirement(item.requirement)} key={index} />)}
                 </Slider>
 
             </div>
