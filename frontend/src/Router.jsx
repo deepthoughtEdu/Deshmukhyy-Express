@@ -28,9 +28,9 @@ const PrivateRoutes = function (props) {
     return (
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home {...props} />} />
+            {/* <Route path="/" element={<Home {...props} />} /> */}
             <Route path="/user" element={<User {...props} />} />
-            <Route path="/delivery-partner" element={<DeliveryPartner {...props} />} />
+            <Route path="/" element={<DeliveryPartner {...props} />} />
             <Route path="/about-us" element={<AboutUs {...props}/>} />
             <Route path="/services" element={<Services {...props}/>} />
           </Routes>

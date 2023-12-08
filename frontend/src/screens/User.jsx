@@ -3,6 +3,10 @@ import Flickity from "react-flickity-component";
 import {Button, Modal} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import Slider from "react-slick";
+
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -10,29 +14,45 @@ import Request from "../components/Request";
 import RequestStepper from "../components/RequestStepper";
 
 import data from '../data/requests.json';
-import "flickity/css/flickity.css";
+import requirements from '../data/requirements.json';
 import { createRequest, generateUUID, loadRequests } from "../utilities";
 
 export default function User (props) {
     /** State variables and their setter methods */
     const [requests, setRequests] = useState(data);
     const [open, setOpen] = useState(false);
+    const [items, setItems] = useState(data);
 
     /** Handles the modal show/hide state variables */
     const handleClose = () => setOpen(false);
     const handleShow = () => setOpen(true);
 
     /** Function to handle the submit event */
-    const dataOnSubmit = async (data) => {
-        const request = await createRequest(data);
-
-        data._id = request.insertedId || generateUUID();
+    const dataOnSubmit = (data) => {
+        data._id = generateUUID();
         data.user = props.user;
 
         setRequests((previousData) => ([data, ...previousData]));
 
         setOpen(false);
     }
+    const getImageBasedOnRequirement = (requirement) => {
+        let item = requirements.find(e => e.value == String(requirement).toLowerCase().split(' ').join(''));
+        return item.image;
+    }
+
+    const settings = {
+        className:"center-slider",
+        centerMode: true,
+        centerPadding: '60px',
+        slidesToShow: 3,
+        arrows: true,
+        dots: true,
+        speed: 300,
+        infinite: true,
+        // autoplaySpeed: 2500,
+        // autoplay: true
+      };
 
     /** This hook will run once the page loads */
     useEffect(() => {
@@ -44,19 +64,15 @@ export default function User (props) {
       <>
         <NavBar />
 
-        <div className="container mt-5">
+        <div className="px-4 mt-5">
           <div className="row mt-5 justify-content-center">
-            <h3 className="mt-5 text-center">Orders and deliveries</h3>
+              <h3 className="">Orders and deliveries</h3>
           </div>
-          <div className="row justify-content-center">
+          
+          <Slider {...settings}>
+              {requests.map((item, index) => <Request data={item} image={getImageBasedOnRequirement(item.requirement)} key={index} />)}
+          </Slider>
 
-            <Flickity className="mt-4 w-75">
-              {requests && requests.map((item) => (
-                <Request data={item} key={item._id} />
-              ))}
-            </Flickity>
-
-          </div>
         </div>
 
         <div className="container">
