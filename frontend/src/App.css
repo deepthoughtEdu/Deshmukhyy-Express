@@ -11,6 +11,10 @@
   font-size: 26px !important;
 }
 
+.slick-slide:not(.slick-current) .request-card {
+  opacity: .5;
+}
+
 /* Default slide */
 .center-slider .slick-slide {
   display: flex;

@@ -27,8 +27,8 @@ export default function Home() {
         dots: true,
         speed: 300,
         infinite: true,
-        autoplaySpeed: 5000,
-        // autoplay: true
+        autoplaySpeed: 2500,
+        autoplay: true
       };
 
     return (
