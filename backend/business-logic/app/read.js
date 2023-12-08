@@ -40,7 +40,6 @@ read.logic = async (req) => {
     return utilities.paginate(`/api/app${req.url}`, collection, count, limit, page);
 };
 
-
 function getImageUrlFromRequirement(requirement) {
     let item = requirements.find(e => e.value == String(requirement).toLowerCase().split(' ').join(''));
     return item && item.image;
