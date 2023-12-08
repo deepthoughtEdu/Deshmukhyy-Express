@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Flickity from "react-flickity-component";
 import {Button, Modal} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Slider from "react-slick";
+import swal from "sweetalert";
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -13,32 +13,36 @@ import Footer from "../components/Footer";
 import Request from "../components/Request";
 import RequestStepper from "../components/RequestStepper";
 
-import data from '../data/requests.json';
 import requirements from '../data/requirements.json';
-import { createRequest, generateUUID, loadRequests } from "../utilities";
+import { createRequest,loadRequests } from "../utilities";
 
 export default function User (props) {
     /** State variables and their setter methods */
-    const [requests, setRequests] = useState(data);
+    const [requests, setRequests] = useState([]);
     const [open, setOpen] = useState(false);
-    const [items, setItems] = useState(data);
 
     /** Handles the modal show/hide state variables */
     const handleClose = () => setOpen(false);
     const handleShow = () => setOpen(true);
 
     /** Function to handle the submit event */
-    const dataOnSubmit = (data) => {
-        data._id = generateUUID();
+    const dataOnSubmit = async (data) => {
+        const item = await createRequest(data);
+        
+        data._id = item.insertedId;
         data.user = props.user;
 
         setRequests((previousData) => ([data, ...previousData]));
-
         setOpen(false);
+
+        swal('Success!',
+        'Created successfully!',
+        'success');
     }
+
     const getImageBasedOnRequirement = (requirement) => {
-        let item = requirements.find(e => e.value == String(requirement).toLowerCase().split(' ').join(''));
-        return item.image;
+        let item = requirements.find(e => e.value === String(requirement).toLowerCase().split(' ').join(''));
+        return item && item.image;
     }
 
     const settings = {
@@ -50,8 +54,8 @@ export default function User (props) {
         dots: true,
         speed: 300,
         infinite: true,
-        // autoplaySpeed: 2500,
-        // autoplay: true
+        autoplaySpeed: 2500,
+        autoplay: true
       };
 
     /** This hook will run once the page loads */
