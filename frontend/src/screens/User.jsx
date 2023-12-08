@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Flickity from "react-flickity-component";
 import {Button, Modal} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -15,13 +14,12 @@ import RequestStepper from "../components/RequestStepper";
 
 import data from '../data/requests.json';
 import requirements from '../data/requirements.json';
-import { createRequest, generateUUID, loadRequests } from "../utilities";
+import { generateUUID, loadRequests } from "../utilities";
 
 export default function User (props) {
     /** State variables and their setter methods */
     const [requests, setRequests] = useState(data);
     const [open, setOpen] = useState(false);
-    const [items, setItems] = useState(data);
 
     /** Handles the modal show/hide state variables */
     const handleClose = () => setOpen(false);
@@ -37,8 +35,8 @@ export default function User (props) {
         setOpen(false);
     }
     const getImageBasedOnRequirement = (requirement) => {
-        let item = requirements.find(e => e.value == String(requirement).toLowerCase().split(' ').join(''));
-        return item.image;
+        let item = requirements.find(e => e.value === String(requirement).toLowerCase().split(' ').join(''));
+        return item && item.image;
     }
 
     const settings = {

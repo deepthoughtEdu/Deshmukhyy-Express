@@ -2,7 +2,6 @@ import './App.css';
 import React, {useEffect, useState} from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from './screens/Home';
 import AboutUs from './screens/About';
 import Services from './screens/Services';
 import Login from './screens/Login';
@@ -28,9 +27,8 @@ const PrivateRoutes = function (props) {
     return (
         <BrowserRouter>
           <Routes>
-            {/* <Route path="/" element={<Home {...props} />} /> */}
-            <Route path="/user" element={<User {...props} />} />
             <Route path="/" element={<DeliveryPartner {...props} />} />
+            <Route path="/user" element={<User {...props} />} />
             <Route path="/about-us" element={<AboutUs {...props}/>} />
             <Route path="/services" element={<Services {...props}/>} />
           </Routes>
