@@ -257,7 +257,7 @@
   grid-template-row: auto auto;
   background: hsl(0 0% 100% / 0.5);
   backdrop-filter: blur(var(--blur));
-  height: 32%;
+  height: 30%;
   align-content: center;
 }
 
