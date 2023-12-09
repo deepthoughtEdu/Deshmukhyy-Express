@@ -10,11 +10,11 @@ import "slick-carousel/slick/slick-theme.css";
 
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import Request from "../components/Request";
 import RequestStepper from "../components/RequestStepper";
 
 import requirements from '../data/requirements.json';
 import { createRequest,loadRequests } from "../utilities";
+import RequestCard from "../components/RequestCard";
 
 export default function User (props) {
     /** State variables and their setter methods */
@@ -74,7 +74,7 @@ export default function User (props) {
           </div>
           
           <Slider {...settings}>
-              {requests.map((item, index) => <Request data={item} image={getImageBasedOnRequirement(item.requirement)} key={index} />)}
+              {requests.map((item, index) => <RequestCard data={item} image={getImageBasedOnRequirement(item.requirement)} key={index} />)}
           </Slider>
 
         </div>

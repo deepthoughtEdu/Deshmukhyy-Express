@@ -7,38 +7,33 @@ const defaultImages = {
   delivery: "/food.jpeg",
 };
 
-export default function RequestCard({ data, onOrderAccept }) {
+export default function RequestCard({ data, onOrderAccept, styles = {}, actionButton = false }) {
   const getCardImage = (cardData) => {
     let { image, category } = cardData;
     if (image) return image;
 
-    return defaultImages[category];
+    return defaultImages[category] || '/default_large.png';
   };
 
   return (
-    <a
-      href="#"
-      className="action-card m-3 px-0 position-relative"
-      style={{ width: "20rem" }}
-    >
-      <div
-        className="ribbon pe-4 text-capitalize right">
-        {data.category}
-      </div>
-      <img
-        src={getCardImage(data)}
-        alt="balloon with an emoji face"
-        className="card__img"
-      />
-      <span className="card__footer pb-2">
-        <span className="text-capitalize">{data.requirement}</span>
-        <span>{moment(data.createdAt).format("Do MMM, YYYY [at] h:mmA")}</span>
-      </span>
-      <span className="card__action">
-        <Button variant="dark" id={data._id} onClick={onOrderAccept}>
-          Accept
-        </Button>
-      </span>
+    <a href="#" className="action-card m-3 text-black px-0 position-relative" style={styles}>
+        <div className="ribbon pe-4 text-capitalize right">
+            {data.category}
+        </div>
+        <img src={getCardImage(data)} alt="" className="card__img" />
+        <span className="card__footer pb-2">
+            <span className="text-capitalize">{data.requirement}</span>
+            <span>{moment(data.createdAt).format("Do MMM, YYYY [at] h:mmA")}</span>
+        </span>
+
+        {actionButton ? (
+            <span className="card__action">
+                <Button variant="dark" id={data._id} onClick={onOrderAccept}>
+                    Accept
+                </Button>
+            </span>
+        ) : ''}
     </a>
+
   );
 }
