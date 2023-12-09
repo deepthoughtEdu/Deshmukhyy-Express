@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import Request from "../components/Request";
+import RequestCard from "../components/RequestCard";
 import RequestStepper from "../components/RequestStepper";
 
 import data from '../data/requests.json';
@@ -67,9 +67,9 @@ export default function User (props) {
               <h3 className="">Orders and deliveries</h3>
           </div>
           
-          <Slider {...settings}>
-              {requests.map((item, index) => <Request data={item} image={getImageBasedOnRequirement(item.requirement)} key={index} />)}
-          </Slider>
+            <Slider {...settings}>
+                {requests.map((item, index) => <RequestCard data={item} image={getImageBasedOnRequirement(item.requirement)} key={index} />)}
+            </Slider>
 
         </div>
 

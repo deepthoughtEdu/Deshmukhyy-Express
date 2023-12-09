@@ -236,6 +236,7 @@
   overflow: hidden;
   color: #000;
   transform: translateZ(0);
+  display: block;
 }
 
 .card__img {
