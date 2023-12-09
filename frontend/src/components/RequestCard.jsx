@@ -27,12 +27,12 @@ export default function RequestCard({ data, onOrderAccept }) {
       </div>
       <img
         src={getCardImage(data)}
-        alt="balloon with an emoji face"
+        alt=""
         className="card__img"
       />
-      <span className="card__footer">
+      <span className="card__footer pb-2">
         <span className="text-capitalize">{data.requirement}</span>
-        <span>2 minutes!</span>
+        <span>{moment(data.createdAt).format("Do MMM, YYYY [at] h:mmA")}</span>
       </span>
       <span className="card__action">
         <Button variant="dark" id={data._id} onClick={onOrderAccept}>
