@@ -29,7 +29,7 @@ export default function DeliveryPartner(props) {
         <div className="container mt-5 pt-4">
           <h4 className="mb-4 text-center">Pending requests</h4>
           
-          <div className="row">
+          <div className="row justify-content-center">
             {requests.map((item, index) => {
                 return (
                   <RequestCard onOrderAccept={onOrderAccept} data={item} key={index} />
