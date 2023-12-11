@@ -32,7 +32,7 @@ export default function DeliveryPartner(props) {
           <div className="row justify-content-center">
             {requests.map((item, index) => {
                 return (
-                  <RequestCard onOrderAccept={onOrderAccept} data={item} key={index} />
+                  <RequestCard onOrderAccept={onOrderAccept} styles={{width: '20rem'}} data={item} key={index} />
                 )
             })}
           </div>
