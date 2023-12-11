@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Slider from "react-slick";
+import Slider from "_________________"; //We are using the react-slick import the slider
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -7,8 +7,8 @@ import "slick-carousel/slick/slick-theme.css";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Request from "../components/Request";
-import data from '../data/requests.json';
-import requirements from '../data/requirements.json';
+import data from '_____________________________'; //You can get the data from data folder.
+import requirements from '_____________________________';
 
 export default function Home() {
     const [items, setItems] = useState(data);
@@ -31,6 +31,8 @@ export default function Home() {
         autoplay: true
       };
 
+      //write the name of the function through which you would be able to put the image in place
+
     return (
         <>
             <NavBar  />
@@ -41,8 +43,8 @@ export default function Home() {
                 </div>
                 
                 <Slider {...settings}>
-                    {items.map((item, index) => <Request data={item} image={getImageBasedOnRequirement(item.requirement)} key={index} />)}
-                </Slider>
+                    {items.map((item, index) => <Request data={item} image={___________________________(item.requirement)} key={index} />)} 
+                </Slider> 
 
             </div>
 
