@@ -37,7 +37,7 @@ export default function Authentication() {
           <div className="form-group">
             <div className="relative">
               <input
-                className="form-control"
+                className="form-control pl-5"
                 name="username"
                 type="text"
                 required
@@ -52,7 +52,7 @@ export default function Authentication() {
           <div className="">
             <div className="relative">
               <input
-                className="form-control"
+                className="form-control pl-5"
                 name="password"
                 type="password"
                 required
