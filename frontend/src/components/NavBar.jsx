@@ -18,7 +18,7 @@ export default function NavBar(props) {
     }
 
     return (
-        <header className="page-header">
+        <header className="page-header position-fixed">
         <div className="d-flex justify-content-between w-100 align-items-center">
             <div className="d-flex">
             <img
