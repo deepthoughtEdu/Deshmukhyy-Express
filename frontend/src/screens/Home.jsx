@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Flickity from "react-flickity-component";
-import {Button, Modal} from 'react-bootstrap';
+import {Button, Modal} from '__________________'; //import the library react-bootstrap
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Slider from "react-slick";
@@ -11,10 +10,9 @@ import "slick-carousel/slick/slick-theme.css";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Request from "../components/Request";
-import RequestStepper from "../components/RequestStepper";
+import RequestStepper from "____________________________"; //import the component RequestStepper.jsx
 
 import data from '../data/requests.json';
-import "flickity/css/flickity.css";
 import { generateUUID } from "../utilities";
 import requirements from '../data/requirements.json';
 
@@ -51,8 +49,6 @@ export default function Home (props) {
         dots: true,
         speed: 300,
         infinite: true,
-        // autoplaySpeed: 2500,
-        // autoplay: true
       };
     
     return (<>
@@ -74,31 +70,20 @@ export default function Home (props) {
             className="position-absolute"
             style={{ bottom: "60px", right: "60px" }}>
 
-            <Button
-              className="btn-dark create-btn-rounded"
-              onClick={handleShow}
-              >
-
+            <Button className="btn-dark create-btn-rounded" onClick={handleShow}>
               <FontAwesomeIcon icon={faPlus} />
-
             </Button>
           </div>
         </div>
 
-        <Modal
-          size="lg"
-          show={open}
-          onHide={handleClose}
-          backdrop="static"
-          keyboard={false}
-        >
+        <Modal size="lg" show={open} onHide={handleClose} backdrop="static" keyboard={false}>
           <Modal.Header closeButton>
             <Modal.Title>New Request</Modal.Title>
           </Modal.Header>
 
-          <Modal.Body>
+          {/* add the open tag Modal.body to implement modal */}
               <RequestStepper onSubmit={dataOnSubmit} />
-          </Modal.Body>
+          {/* close the Modal.body tag */}
           
         </Modal>
 
