@@ -1,5 +1,5 @@
 const utilities = require('../utilities');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const database = require("../database");
 const {collections} = require("../database");
 
