@@ -1,18 +1,11 @@
 [
     {
         "_id": "656b1ef4307b90ccd94c1c02",
-        "uid": "6b0c852e-7022-11ee-9234-0123456789ab",
-        "createdAt": "2023-12-02T12:11:32.943Z",
         "status": "completed",
         "category": "delivery",
         "time": "6:00pm",
         "fare": "60",
         "requirement": "noodles",
-        "acceptedAt": "2023-12-02T12:12:29.789Z",
-        "acceptedBy": "4a43d4be-8940-11ee-9234-0123456789ab",
-        "delivered": true,
-        "deliveredAt": "2023-12-02T12:13:26.068Z",
-        "rating": "4",
         "user": {
             "username": "Muskan",
             "email": "shagunmishra2001.vns@gmail.com"
@@ -20,18 +13,11 @@
     },
     {
         "_id": "656b2d6adafc19587db76389",
-        "uid": "a77ba3fe-86bc-11ee-9234-0123456789ab",
-        "createdAt": "2023-12-02T13:13:14.444Z",
         "status": "completed",
         "category": "delivery",
         "time": "6:00pm",
         "fare": "500",
         "requirement": "chapati+curry",
-        "acceptedAt": "2023-12-02T18:48:29.073Z",
-        "acceptedBy": "a77ba3fe-86bc-11ee-9234-0123456789ab",
-        "delivered": true,
-        "deliveredAt": "2023-12-02T19:07:50.318Z",
-        "rating": "2",
         "user": {
             "username": "ramakrishna58",
             "email": "ramakrishnashr1802@gmail.com"
@@ -39,15 +25,11 @@
     },
     {
         "_id": "656b2d71dafc19587db7638a",
-        "uid": "a77ba3fe-86bc-11ee-9234-0123456789ab",
-        "createdAt": "2023-12-02T13:13:21.569Z",
         "status": "approved",
         "category": "delivery",
         "time": "6:00pm",
         "fare": "500",
         "requirement": "chapati+curry",
-        "acceptedAt": "2023-12-04T12:50:54.239Z",
-        "acceptedBy": "4061474e-92a3-11ee-9234-0123456789ab",
         "user": {
             "username": "ramakrishna58",
             "email": "ramakrishnashr1802@gmail.com"
@@ -55,15 +37,11 @@
     },
     {
         "_id": "656b33390c2bb4bf8b722a86",
-        "uid": "fbac25fe-86c9-11ee-9234-0123456789ab",
-        "createdAt": "2023-12-02T13:38:01.045Z",
         "status": "approved",
         "category": "delivery",
         "time": "10:00pm",
         "fare": "98599",
         "requirement": "noodles",
-        "acceptedAt": "2023-12-04T12:55:07.189Z",
-        "acceptedBy": "d661da2e-92a3-11ee-9234-0123456789ab",
         "user": {
             "username": "d yuvaraj",
             "email": "dudukuruyuvaraj55@gmail.com"
@@ -71,15 +49,11 @@
     },
     {
         "_id": "656b7bddfaf6a05b6e4fc72d",
-        "uid": "a77ba3fe-86bc-11ee-9234-0123456789ab",
-        "createdAt": "2023-12-02T18:47:57.852Z",
         "status": "approved",
         "category": "delivery",
         "time": "9:00pm",
         "fare": "200",
         "requirement": "biryani",
-        "acceptedAt": "2023-12-04T13:06:23.358Z",
-        "acceptedBy": "d661da2e-92a3-11ee-9234-0123456789ab",
         "user": {
             "username": "ramakrishna58",
             "email": "ramakrishnashr1802@gmail.com"
@@ -87,8 +61,6 @@
     },
     {
         "_id": "656ba2dec6e1b5479e4b917f",
-        "uid": "997c8dbe-873d-11ee-9234-0123456789ab",
-        "createdAt": "2023-12-02T21:34:22.133Z",
         "status": "waiting",
         "category": "delivery",
         "time": "7:00pm",
@@ -101,14 +73,11 @@
     },
     {
         "_id": "656ba2e6c6e1b5479e4b9180",
-        "uid": "997c8dbe-873d-11ee-9234-0123456789ab",
-        "createdAt": "2023-12-02T21:34:30.636Z",
         "status": "approved",
         "category": "delivery",
         "time": "7:00pm",
         "fare": "1999",
         "requirement": "biryani",
-        "updatedAt": "2023-12-02T21:35:04.533Z",
         "user": {
             "username": "anand",
             "email": "anandudayprakash@gmail.com"
@@ -116,15 +85,11 @@
     },
     {
         "_id": "656c6d9d5ab9adb929292927",
-        "uid": "016db67e-8e9f-11ee-9234-0123456789ab",
-        "createdAt": "2023-12-03T11:59:25.347Z",
         "status": "approved",
         "category": "drop",
         "time": "4:00pm",
         "fare": "444",
         "requirement": "chapati+curry",
-        "acceptedAt": "2023-12-04T12:50:59.852Z",
-        "acceptedBy": "4061474e-92a3-11ee-9234-0123456789ab",
         "user": {
             "username": "poojitha_reddy_1116",
             "email": "pulakantipullareddy369@gmail.com"
@@ -132,8 +97,6 @@
     },
     {
         "_id": "656d5900df642d1684833d65",
-        "uid": "b75ecf6e-862e-11ee-9234-0123456789ab",
-        "createdAt": "2023-12-04T04:43:44.720Z",
         "status": "waiting",
         "category": "delivery",
         "time": "12:00pm",
@@ -146,15 +109,11 @@
     },
     {
         "_id": "656dcb55e5da9dce60bcf444",
-        "uid": "05aae9de-92a3-11ee-9234-0123456789ab",
-        "createdAt": "2023-12-04T12:51:33.636Z",
         "status": "approved",
         "category": "delivery",
         "time": "11:00pm",
         "fare": "100",
         "requirement": "noodles",
-        "acceptedAt": "2023-12-04T12:55:10.136Z",
-        "acceptedBy": "05aae9de-92a3-11ee-9234-0123456789ab",
         "user": {
             "username": "nani1113",
             "email": "angalimanojkumar@gmail.com"

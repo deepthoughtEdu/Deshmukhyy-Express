@@ -3,22 +3,6 @@ import moment from "moment";
 
 export default function Request({ data, image }) {
 
-  const getClassnameBasedOnStatus = (status) => {
-    switch (status) {
-      case "approved":
-        return " btn-info";
-
-      case "pending":
-        return " btn-warning";
-
-      case "completed":
-        return " btn-success";
-
-      default:
-        return " btn-light";
-    }
-  };
-
   return (
     <div className="request-card">
         <div
